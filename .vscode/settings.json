@@ -1,0 +1,29 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.dart_tool": true,
+    "**/.idea": true,
+    "**/build": true,
+    "**/chat_life.iml": true,
+    "**/pubspec.lock": true,
+    "**/.metadata": true,
+    "**/.vscode": true,
+    "**/.flutter-plugins": true,
+    "**/.flutter-plugins-dependencies": true
+  },
+  "explorerExclude.backup": {},
+  "cSpell.words": [
+    "Cupertino",
+    "horiz",
+    "LTRB",
+    "Mercurius",
+    "riverpod",
+    "trackpad",
+    "unicons"
+  ]
+}

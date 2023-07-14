@@ -1,0 +1,55 @@
+name: chat_life
+description: A new Flutter project.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.5 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations: # Flutter [网址略]
+    sdk: flutter
+  badges: ^3.1.1 # 小红点提示 [https://pub.dev/packages/badges]
+  cupertino_icons: ^1.0.5
+  dart_date: ^1.2.2 # 转换时间工具 [https://pub.dev/packages/dart_date]
+  flutter_svg: ^2.0.6
+  flutter_chat_ui: ^1.6.9
+  flutter_chat_types: ^3.6.2
+  flutter_riverpod: ^2.3.6 # 状态管理 [https://pub.dev/packages/riverpod]
+  freezed_annotation: ^2.4.1
+  loading_animation_widget: ^1.2.0+4 # 加载器组件 [https://pub.dev/packages/loading_animation_widget]
+  intl: ^0.18.0 # 国际化 [https://pub.dev/packages/intl]
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  json_annotation: ^4.8.1
+  path_provider: ^2.0.15
+  riverpod_annotation: ^2.1.1 # 状态管理相关 [https://pub.dev/packages/riverpod_annotation]
+  unicons: ^2.1.1 # 图标 [https://pub.dev/packages/unicons]
+  window_manager: ^0.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  freezed: ^2.4.1
+  isar_generator: ^3.1.0+1
+  json_serializable: ^6.7.1
+  riverpod_generator: ^2.2.3 # riverpod 代码生成工具 [https://pub.dev/packages/riverpod]
+  riverpod_lint: ^1.3.2 # riverpod 代码检查 [https://pub.dev/packages/riverpod_lint]
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Torus
+      fonts:
+        - asset: assets/fonts/Torus-Regular.otf
+        - asset: assets/fonts/Torus-Bold.otf
+          weight: 700
