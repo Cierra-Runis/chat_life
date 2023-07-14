@@ -1,3 +1,4 @@
+import 'package:chat_life/common/chat_life_user.dart';
 import 'package:chat_life/index.dart';
 
 class SaveViewWidget extends StatelessWidget {
@@ -35,6 +36,9 @@ class SaveViewWidget extends StatelessWidget {
                       createDateTime: DateTime.now(),
                       latestEditTime: DateTime.now(),
                       messagesJsonString: '[]',
+                      currentUserJsonString: jsonEncode(
+                        ChatLifeUser.mercury.toJson(),
+                      ),
                     ),
                   ),
                   onLongPress: isarService.cleanDb,

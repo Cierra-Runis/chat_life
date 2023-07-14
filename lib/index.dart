@@ -12,6 +12,7 @@ export 'models/index.dart';
 export 'pages/index.dart';
 export 'widgets/index.dart';
 
+export 'package:animated_text_kit/animated_text_kit.dart';
 export 'package:badges/badges.dart';
 export 'package:chatview/chatview.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
