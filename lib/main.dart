@@ -5,11 +5,13 @@ IsarService isarService = IsarService();
 void main() => ChatLife.run();
 
 class ChatLifeApp extends StatelessWidget {
-  const ChatLifeApp({super.key});
+  const ChatLifeApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final DateTime dateTime = DateTime(2023, 1, 1, 19, 0);
+    final dateTime = DateTime(2023, 01, 01, 19);
 
     return MaterialApp(
       title: ChatLife.appName,
@@ -21,7 +23,9 @@ class ChatLifeApp extends StatelessWidget {
         useMaterial3: true,
       ),
       scrollBehavior: const _PlatformScrollBehavior(),
-      home: DesktopPage(dateTime: dateTime),
+      home: DesktopPage(
+        dateTime: dateTime,
+      ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

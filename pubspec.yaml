@@ -13,11 +13,10 @@ dependencies:
   flutter_localizations: # Flutter [网址略]
     sdk: flutter
   badges: ^3.1.1 # 小红点提示 [https://pub.dev/packages/badges]
+  chatview: ^1.3.0
   cupertino_icons: ^1.0.5
   dart_date: ^1.2.2 # 转换时间工具 [https://pub.dev/packages/dart_date]
   flutter_svg: ^2.0.6
-  flutter_chat_ui: ^1.6.9
-  flutter_chat_types: ^3.6.2
   flutter_riverpod: ^2.3.6 # 状态管理 [https://pub.dev/packages/riverpod]
   freezed_annotation: ^2.4.1
   loading_animation_widget: ^1.2.0+4 # 加载器组件 [https://pub.dev/packages/loading_animation_widget]

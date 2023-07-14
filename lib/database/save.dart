@@ -1,4 +1,5 @@
 import 'package:chat_life/index.dart';
+
 part 'save.g.dart';
 
 @collection
@@ -7,6 +8,7 @@ class Save {
     required this.id,
     required this.createDateTime,
     required this.latestEditTime,
+    required this.messagesJsonString,
   });
 
   final Id id;
@@ -16,4 +18,7 @@ class Save {
 
   /// 最后编辑时间
   final DateTime latestEditTime;
+
+  /// 历史信息
+  final String messagesJsonString;
 }

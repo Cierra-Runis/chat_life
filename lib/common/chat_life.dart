@@ -12,9 +12,8 @@ class ChatLife {
     WidgetsFlutterBinding.ensureInitialized();
 
     await windowsInit();
-    ChatLife.printLog('run!');
 
-    runApp(const ChatLifeApp());
+    runApp(const ProviderScope(child: ChatLifeApp()));
   }
 
   static void printLog(dynamic newLog) {
@@ -95,7 +94,7 @@ class ChatLife {
     onErrorContainer: Color(0xFFFFDAD6),
     background: Color(0xFF242424), // 主要容器背景色
     onBackground: Color(0xFFECE0DA),
-    surface: Color(0xFF303030), // 标题栏和卡片背景颜色
+    surface: Color(0xFF222222), // 标题栏和卡片背景颜色
     onSurface: Color(0xFFECE0DA), // 最基础字体色
     surfaceVariant: Color(0xFF52443C),
     onSurfaceVariant: Color(0xFFD7C3B8),

@@ -30,6 +30,7 @@ class ChatLifeSaveWidget extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => HomePage(
+                      save: save,
                       dateTime: dateTime,
                     ),
                   ),

@@ -29,15 +29,15 @@ class SaveViewWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: InkWell(
-                  onTap: () {
-                    isarService.saveSave(
-                      Save(
-                        id: Isar.autoIncrement,
-                        createDateTime: DateTime.now(),
-                        latestEditTime: DateTime.now(),
-                      ),
-                    );
-                  },
+                  onTap: () => isarService.saveSave(
+                    Save(
+                      id: Isar.autoIncrement,
+                      createDateTime: DateTime.now(),
+                      latestEditTime: DateTime.now(),
+                      messagesJsonString: '[]',
+                    ),
+                  ),
+                  onLongPress: isarService.cleanDb,
                   child: const Icon(Icons.add),
                 ),
               ),

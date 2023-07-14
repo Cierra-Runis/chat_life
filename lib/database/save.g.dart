@@ -26,6 +26,11 @@ const SaveSchema = CollectionSchema(
       id: 1,
       name: r'latestEditTime',
       type: IsarType.dateTime,
+    ),
+    r'messagesJsonString': PropertySchema(
+      id: 2,
+      name: r'messagesJsonString',
+      type: IsarType.string,
     )
   },
   estimateSize: _saveEstimateSize,
@@ -48,6 +53,7 @@ int _saveEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.messagesJsonString.length * 3;
   return bytesCount;
 }
 
@@ -59,6 +65,7 @@ void _saveSerialize(
 ) {
   writer.writeDateTime(offsets[0], object.createDateTime);
   writer.writeDateTime(offsets[1], object.latestEditTime);
+  writer.writeString(offsets[2], object.messagesJsonString);
 }
 
 Save _saveDeserialize(
@@ -71,6 +78,7 @@ Save _saveDeserialize(
     createDateTime: reader.readDateTime(offsets[0]),
     id: id,
     latestEditTime: reader.readDateTime(offsets[1]),
+    messagesJsonString: reader.readString(offsets[2]),
   );
   return object;
 }
@@ -86,6 +94,8 @@ P _saveDeserializeProp<P>(
       return (reader.readDateTime(offset)) as P;
     case 1:
       return (reader.readDateTime(offset)) as P;
+    case 2:
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -334,6 +344,137 @@ extension SaveQueryFilter on QueryBuilder<Save, Save, QFilterCondition> {
       ));
     });
   }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'messagesJsonString',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'messagesJsonString',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'messagesJsonString',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'messagesJsonString',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterFilterCondition>
+      messagesJsonStringIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'messagesJsonString',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension SaveQueryObject on QueryBuilder<Save, Save, QFilterCondition> {}
@@ -362,6 +503,18 @@ extension SaveQuerySortBy on QueryBuilder<Save, Save, QSortBy> {
   QueryBuilder<Save, Save, QAfterSortBy> sortByLatestEditTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'latestEditTime', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterSortBy> sortByMessagesJsonString() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'messagesJsonString', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterSortBy> sortByMessagesJsonStringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'messagesJsonString', Sort.desc);
     });
   }
 }
@@ -402,6 +555,18 @@ extension SaveQuerySortThenBy on QueryBuilder<Save, Save, QSortThenBy> {
       return query.addSortBy(r'latestEditTime', Sort.desc);
     });
   }
+
+  QueryBuilder<Save, Save, QAfterSortBy> thenByMessagesJsonString() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'messagesJsonString', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Save, Save, QAfterSortBy> thenByMessagesJsonStringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'messagesJsonString', Sort.desc);
+    });
+  }
 }
 
 extension SaveQueryWhereDistinct on QueryBuilder<Save, Save, QDistinct> {
@@ -414,6 +579,14 @@ extension SaveQueryWhereDistinct on QueryBuilder<Save, Save, QDistinct> {
   QueryBuilder<Save, Save, QDistinct> distinctByLatestEditTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'latestEditTime');
+    });
+  }
+
+  QueryBuilder<Save, Save, QDistinct> distinctByMessagesJsonString(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'messagesJsonString',
+          caseSensitive: caseSensitive);
     });
   }
 }
@@ -434,6 +607,12 @@ extension SaveQueryProperty on QueryBuilder<Save, Save, QQueryProperty> {
   QueryBuilder<Save, DateTime, QQueryOperations> latestEditTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'latestEditTime');
+    });
+  }
+
+  QueryBuilder<Save, String, QQueryOperations> messagesJsonStringProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'messagesJsonString');
     });
   }
 }
