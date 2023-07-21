@@ -14,7 +14,6 @@ export 'widgets/index.dart';
 
 export 'package:animated_text_kit/animated_text_kit.dart';
 export 'package:badges/badges.dart';
-export 'package:chatview/chatview.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
 export 'package:dart_date/dart_date.dart' hide Interval;
 export 'package:flutter_svg/flutter_svg.dart';

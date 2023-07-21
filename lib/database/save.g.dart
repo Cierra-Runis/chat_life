@@ -22,20 +22,10 @@ const SaveSchema = CollectionSchema(
       name: r'createDateTime',
       type: IsarType.dateTime,
     ),
-    r'currentUserJsonString': PropertySchema(
-      id: 1,
-      name: r'currentUserJsonString',
-      type: IsarType.string,
-    ),
     r'latestEditTime': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'latestEditTime',
       type: IsarType.dateTime,
-    ),
-    r'messagesJsonString': PropertySchema(
-      id: 3,
-      name: r'messagesJsonString',
-      type: IsarType.string,
     )
   },
   estimateSize: _saveEstimateSize,
@@ -58,8 +48,6 @@ int _saveEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.currentUserJsonString.length * 3;
-  bytesCount += 3 + object.messagesJsonString.length * 3;
   return bytesCount;
 }
 
@@ -70,9 +58,7 @@ void _saveSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDateTime(offsets[0], object.createDateTime);
-  writer.writeString(offsets[1], object.currentUserJsonString);
-  writer.writeDateTime(offsets[2], object.latestEditTime);
-  writer.writeString(offsets[3], object.messagesJsonString);
+  writer.writeDateTime(offsets[1], object.latestEditTime);
 }
 
 Save _saveDeserialize(
@@ -83,10 +69,8 @@ Save _saveDeserialize(
 ) {
   final object = Save(
     createDateTime: reader.readDateTime(offsets[0]),
-    currentUserJsonString: reader.readString(offsets[1]),
     id: id,
-    latestEditTime: reader.readDateTime(offsets[2]),
-    messagesJsonString: reader.readString(offsets[3]),
+    latestEditTime: reader.readDateTime(offsets[1]),
   );
   return object;
 }
@@ -101,11 +85,7 @@ P _saveDeserializeProp<P>(
     case 0:
       return (reader.readDateTime(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
-    case 2:
       return (reader.readDateTime(offset)) as P;
-    case 3:
-      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -250,140 +230,6 @@ extension SaveQueryFilter on QueryBuilder<Save, Save, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition>
-      currentUserJsonStringGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'currentUserJsonString',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition>
-      currentUserJsonStringStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'currentUserJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> currentUserJsonStringMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'currentUserJsonString',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition>
-      currentUserJsonStringIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'currentUserJsonString',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition>
-      currentUserJsonStringIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'currentUserJsonString',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<Save, Save, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -488,137 +334,6 @@ extension SaveQueryFilter on QueryBuilder<Save, Save, QFilterCondition> {
       ));
     });
   }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'messagesJsonString',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'messagesJsonString',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'messagesJsonString',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition> messagesJsonStringIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'messagesJsonString',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterFilterCondition>
-      messagesJsonStringIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'messagesJsonString',
-        value: '',
-      ));
-    });
-  }
 }
 
 extension SaveQueryObject on QueryBuilder<Save, Save, QFilterCondition> {}
@@ -638,18 +353,6 @@ extension SaveQuerySortBy on QueryBuilder<Save, Save, QSortBy> {
     });
   }
 
-  QueryBuilder<Save, Save, QAfterSortBy> sortByCurrentUserJsonString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentUserJsonString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> sortByCurrentUserJsonStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentUserJsonString', Sort.desc);
-    });
-  }
-
   QueryBuilder<Save, Save, QAfterSortBy> sortByLatestEditTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'latestEditTime', Sort.asc);
@@ -659,18 +362,6 @@ extension SaveQuerySortBy on QueryBuilder<Save, Save, QSortBy> {
   QueryBuilder<Save, Save, QAfterSortBy> sortByLatestEditTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'latestEditTime', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> sortByMessagesJsonString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'messagesJsonString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> sortByMessagesJsonStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'messagesJsonString', Sort.desc);
     });
   }
 }
@@ -685,18 +376,6 @@ extension SaveQuerySortThenBy on QueryBuilder<Save, Save, QSortThenBy> {
   QueryBuilder<Save, Save, QAfterSortBy> thenByCreateDateTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createDateTime', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> thenByCurrentUserJsonString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentUserJsonString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> thenByCurrentUserJsonStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentUserJsonString', Sort.desc);
     });
   }
 
@@ -723,18 +402,6 @@ extension SaveQuerySortThenBy on QueryBuilder<Save, Save, QSortThenBy> {
       return query.addSortBy(r'latestEditTime', Sort.desc);
     });
   }
-
-  QueryBuilder<Save, Save, QAfterSortBy> thenByMessagesJsonString() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'messagesJsonString', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Save, Save, QAfterSortBy> thenByMessagesJsonStringDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'messagesJsonString', Sort.desc);
-    });
-  }
 }
 
 extension SaveQueryWhereDistinct on QueryBuilder<Save, Save, QDistinct> {
@@ -744,25 +411,9 @@ extension SaveQueryWhereDistinct on QueryBuilder<Save, Save, QDistinct> {
     });
   }
 
-  QueryBuilder<Save, Save, QDistinct> distinctByCurrentUserJsonString(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'currentUserJsonString',
-          caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<Save, Save, QDistinct> distinctByLatestEditTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'latestEditTime');
-    });
-  }
-
-  QueryBuilder<Save, Save, QDistinct> distinctByMessagesJsonString(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'messagesJsonString',
-          caseSensitive: caseSensitive);
     });
   }
 }
@@ -780,21 +431,9 @@ extension SaveQueryProperty on QueryBuilder<Save, Save, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Save, String, QQueryOperations> currentUserJsonStringProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'currentUserJsonString');
-    });
-  }
-
   QueryBuilder<Save, DateTime, QQueryOperations> latestEditTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'latestEditTime');
-    });
-  }
-
-  QueryBuilder<Save, String, QQueryOperations> messagesJsonStringProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'messagesJsonString');
     });
   }
 }

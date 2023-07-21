@@ -1,1 +1,1 @@
-
+enum RoomType { group, pm }

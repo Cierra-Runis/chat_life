@@ -1,52 +1,30 @@
 import 'package:chat_life/index.dart';
 
+GlobalKey<NavigatorState> chatLifeAppGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> chatAppGlobalKey = GlobalKey<NavigatorState>();
 IsarService isarService = IsarService();
 
 void main() => ChatLife.run();
 
 class ChatLifeApp extends StatelessWidget {
-  const ChatLifeApp({
-    super.key,
-  });
+  const ChatLifeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     final dateTime = DateTime(2023, 01, 01, 19);
 
-    return MaterialApp(
-      title: ChatLife.appName,
-      theme: ThemeData(
-        fontFamily: 'Torus',
-        colorScheme: dateTime.isDay
-            ? ChatLife.lightColorScheme
-            : ChatLife.darkColorScheme,
-        useMaterial3: true,
-      ),
-      scrollBehavior: const _PlatformScrollBehavior(),
-      home: DesktopPage(
+    return ChatLifeBaseAppWidget(
+      navigatorKey: chatLifeAppGlobalKey,
+      colorScheme:
+          dateTime.isDay ? ChatLife.lightColorScheme : ChatLife.darkColorScheme,
+      home: HomePage(
+        save: Save(
+          id: 0,
+          createDateTime: DateTime.now(),
+          latestEditTime: DateTime.now(),
+        ),
         dateTime: dateTime,
       ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('zh', 'CN'),
-      ],
     );
-  }
-}
-
-class _PlatformScrollBehavior extends CupertinoScrollBehavior {
-  const _PlatformScrollBehavior();
-
-  @override
-  Set<PointerDeviceKind> get dragDevices {
-    return {
-      PointerDeviceKind.touch,
-      PointerDeviceKind.mouse,
-      PointerDeviceKind.trackpad,
-    };
   }
 }

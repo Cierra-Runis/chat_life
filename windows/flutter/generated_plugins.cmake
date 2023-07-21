@@ -3,11 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  emoji_picker_flutter
-  file_selector_windows
   isar_flutter_libs
   screen_retriever
-  url_launcher_windows
   window_manager
 )
 

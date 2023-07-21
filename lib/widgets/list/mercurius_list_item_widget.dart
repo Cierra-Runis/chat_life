@@ -139,7 +139,7 @@ class MercuriusListItemWidget extends StatelessWidget {
                               summaryText ?? '',
                               style: summaryTextStyle ??
                                   TextStyle(
-                                    fontSize: 8,
+                                    fontSize: 12,
                                     color:
                                         Theme.of(context).colorScheme.outline,
                                   ),

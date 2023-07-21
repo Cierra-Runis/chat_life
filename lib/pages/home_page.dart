@@ -13,8 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-    final double side = width / 2.8;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -24,21 +22,8 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          ChatLifeChat(save: save),
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Divider(
-                  thickness: 4,
-                  indent: side,
-                  endIndent: side,
-                ),
-              ),
-            ),
-          )
+          ChatLifeChat(save: save, dateTime: dateTime),
+          const DockBarWidget(),
         ],
       ),
     );
