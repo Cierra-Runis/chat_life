@@ -1,14 +1,12 @@
 import 'package:chat_life/index.dart';
 
-part 'user.g.dart';
-
-@collection
 class User {
   const User({
     required this.id,
     required this.icon,
     required this.name,
-    required this.roomIds,
+    required this.motto,
+    required this.userRooms,
     required this.switchableUserIds,
   });
 
@@ -18,7 +16,18 @@ class User {
 
   final String name;
 
-  final List<Id> roomIds;
+  final String motto;
+
+  final List<UserRoom> userRooms;
 
   final List<Id> switchableUserIds;
+}
+
+class UserRoom {
+  const UserRoom({
+    required this.id,
+    required this.dateTime,
+  });
+  final Id id;
+  final DateTime dateTime;
 }

@@ -1,5 +1,4 @@
 import 'package:chat_life/index.dart';
-import 'package:chat_life/widgets/chat_life_chat.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({

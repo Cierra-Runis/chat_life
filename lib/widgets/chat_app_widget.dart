@@ -15,29 +15,7 @@ class ChatAppWidget extends StatelessWidget {
         child: ChatLifeBaseAppWidget(
           navigatorKey: chatAppGlobalKey,
           colorScheme: colorScheme,
-          home: Scaffold(
-            body: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/icon.svg',
-                    width: 128,
-                    colorFilter:
-                        ColorFilter.mode(colorScheme.outline, BlendMode.srcIn),
-                  ),
-                  Text(
-                    ChatLife.appName,
-                    style: TextStyle(
-                      fontSize: 72,
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.outline,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          home: const Scaffold(body: Center(child: ChatLifeLogoWidget())),
         ),
       ),
     );

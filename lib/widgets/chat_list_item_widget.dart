@@ -3,20 +3,23 @@ import 'package:chat_life/index.dart';
 class ChatListItem extends StatelessWidget {
   const ChatListItem({
     super.key,
+    required this.user,
     required this.room,
   });
 
+  final User user;
   final Room room;
 
   @override
   Widget build(BuildContext context) {
     final chatViewWidget = ChatViewWidget(room: room);
 
+    final messages = room.messages.toList();
+
     return MercuriusListItemWidget(
       icon: AvatarWidget(icon: room.icon),
       titleText: room.title,
-      summaryText:
-          room.unreadMessages.lastOrNull ?? room.messages.lastOrNull ?? '',
+      summaryText: messages.lastOrNull?.content ?? '',
       accessoryView: Column(
         children: [
           const Text(
@@ -24,9 +27,9 @@ class ChatListItem extends StatelessWidget {
             style: TextStyle(fontSize: 12),
           ),
           Badge(
-            showBadge: room.unreadMessages.isNotEmpty,
+            showBadge: messages.isNotEmpty,
             badgeContent: Text(
-              '${room.unreadMessages.length}',
+              '${messages.length}',
               style: const TextStyle(color: Colors.white),
             ),
             badgeStyle: BadgeStyle(
@@ -44,32 +47,7 @@ class ChatListItem extends StatelessWidget {
           );
         } else {
           chatAppGlobalKey.currentState?.pushReplacement(
-            PageRouteBuilder<void>(
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return chatViewWidget;
-              },
-              transitionDuration: const Duration(milliseconds: 500),
-              transitionsBuilder: (
-                context,
-                animation,
-                secondaryAnimation,
-                child,
-              ) {
-                switch (animation.status) {
-                  case AnimationStatus.forward:
-                    return FadeTransition(opacity: animation, child: child);
-                  case AnimationStatus.reverse:
-                    return CupertinoPageTransition(
-                      primaryRouteAnimation: animation,
-                      secondaryRouteAnimation: secondaryAnimation,
-                      linearTransition: false,
-                      child: child,
-                    );
-                  default:
-                    return child;
-                }
-              },
-            ),
+            ChatLifePageRouteWidget(page: chatViewWidget),
           );
         }
       },

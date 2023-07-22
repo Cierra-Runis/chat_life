@@ -10,6 +10,7 @@ class MercuriusListItemWidget extends StatelessWidget {
     this.title,
     this.titleText,
     this.titleTextStyle,
+    this.summary,
     this.summaryText,
     this.summaryTextStyle,
     this.detailText,
@@ -30,6 +31,7 @@ class MercuriusListItemWidget extends StatelessWidget {
   final Widget? title;
   final String? titleText;
   final TextStyle? titleTextStyle;
+  final Widget? summary;
   final String? summaryText;
   final TextStyle? summaryTextStyle;
   final String? detailText;
@@ -117,22 +119,23 @@ class MercuriusListItemWidget extends StatelessWidget {
                     ),
                   ),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Wrap(
+                    direction: Axis.vertical,
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.center,
+                    spacing: 2,
                     children: [
+                      if (title != null) title!,
                       if (titleText != null)
                         Badge(
                           showBadge: showTitleTextBadge ?? false,
                           child: Text(
                             titleText ?? '',
-                            style: titleTextStyle ??
-                                const TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'Saira',
-                                ),
+                            style:
+                                titleTextStyle ?? const TextStyle(fontSize: 16),
                           ),
                         ),
+                      if (summary != null) summary!,
                       if (summaryText != null)
                         Padding(
                           padding: const EdgeInsets.only(top: 4, bottom: 4),

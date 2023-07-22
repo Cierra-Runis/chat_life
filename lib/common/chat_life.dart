@@ -6,6 +6,10 @@ class ChatLife {
 
   static const String appName = 'ChatLife';
 
+  static const String appVersion = 'v1.0.0+1';
+
+  static const String appGithub = 'https://github.com/Cierra-Runis/chat_life';
+
   static const String database = 'ChatLife_database';
 
   static void run() async {
@@ -92,9 +96,9 @@ class ChatLife {
     errorContainer: Color(0xFF93000A),
     onError: Color(0xFF690005),
     onErrorContainer: Color(0xFFFFDAD6),
-    background: Color(0xFF242424), // 主要容器背景色
+    background: Color(0xFF222222), // 主要容器背景色
     onBackground: Color(0xFFECE0DA),
-    surface: Color(0xFF222222), // 标题栏和卡片背景颜色
+    surface: Color(0xFF262626), // 标题栏和卡片背景颜色
     onSurface: Color(0xFFECE0DA), // 最基础字体色
     surfaceVariant: Color(0xFF52443C),
     onSurfaceVariant: Color(0xFFD7C3B8),

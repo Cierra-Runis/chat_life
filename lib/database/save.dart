@@ -1,8 +1,5 @@
 import 'package:chat_life/index.dart';
 
-part 'save.g.dart';
-
-@collection
 class Save {
   const Save({
     required this.id,

@@ -1,3 +1,4 @@
+export 'dart:async' show StreamSubscription;
 export 'dart:convert';
 export 'dart:io';
 export 'dart:ui' show ImageFilter, PointerDeviceKind;
@@ -23,5 +24,6 @@ export 'package:loading_animation_widget/loading_animation_widget.dart'; // 加�
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:isar/isar.dart';
 export 'package:path_provider/path_provider.dart';
+export 'package:url_launcher/url_launcher.dart';
 export 'package:unicons/unicons.dart'; // 图标
 export 'package:window_manager/window_manager.dart';

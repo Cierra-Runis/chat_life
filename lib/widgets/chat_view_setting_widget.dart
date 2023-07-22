@@ -13,10 +13,7 @@ class ChatViewSettingWidget extends StatelessWidget {
     final String title = room.type == RoomType.group ? '群聊设置' : '聊天设置';
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(title)),
       body: MercuriusListWidget(
         children: [
           MercuriusListSectionWidget(

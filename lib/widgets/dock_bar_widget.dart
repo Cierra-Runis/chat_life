@@ -13,7 +13,7 @@ class DockBarWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
         child: Divider(
           color: Theme.of(context).colorScheme.outline,
           thickness: 4,

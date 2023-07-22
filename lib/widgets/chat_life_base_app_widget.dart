@@ -20,9 +20,11 @@ class ChatLifeBaseAppWidget extends StatelessWidget {
         fontFamily: 'Torus',
         colorScheme: colorScheme,
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(centerTitle: true),
       ),
       home: home,
       navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
       scrollBehavior: const _PlatformScrollBehavior(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

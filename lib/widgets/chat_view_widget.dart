@@ -13,6 +13,8 @@ class ChatViewWidget extends StatelessWidget {
     final String memberCount =
         room.type == RoomType.group ? '(${room.userIds.length})' : '';
 
+    final List<Message> messages = room.messages.toList();
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -22,7 +24,6 @@ class ChatViewWidget extends StatelessWidget {
           ),
         ),
         title: Text(room.title + memberCount),
-        centerTitle: true,
         actions: [
           EndDrawerButton(
             onPressed: () => Navigator.push(
@@ -35,16 +36,16 @@ class ChatViewWidget extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: room.messages.length + room.unreadMessages.length,
+        itemCount: messages.length,
         itemBuilder: (context, index) => Dismissible(
           key: ValueKey(
-            [...room.messages, ...room.unreadMessages][index],
+            messages[index],
           ),
           direction: DismissDirection.endToStart,
           confirmDismiss: (direction) async => false,
           child: MercuriusListItemWidget(
             disabled: true,
-            titleText: [...room.messages, ...room.unreadMessages][index],
+            titleText: messages[index].content,
             accessoryView: Container(),
           ),
         ),

@@ -4,14 +4,12 @@ part 'room.g.dart';
 
 @collection
 class Room {
-  const Room({
+  Room({
     required this.id,
     required this.type,
     required this.title,
     required this.icon,
     required this.userIds,
-    required this.messages,
-    required this.unreadMessages,
   });
 
   final Id id;
@@ -25,7 +23,6 @@ class Room {
 
   final List<Id> userIds;
 
-  final List<String> messages;
-
-  final List<String> unreadMessages;
+  @Backlink(to: 'room')
+  final messages = IsarLinks<Message>();
 }

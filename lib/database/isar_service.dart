@@ -8,31 +8,15 @@ class IsarService {
     _db = openDB();
   }
 
-  Future<int> saveSave(Save newSave) async {
-    final isar = await _db;
-    return isar.writeTxn(() => isar.saves.put(newSave));
-  }
-
-  Stream<List<Save>> listenToSaves({
-    int delayed = 1000,
-  }) async* {
-    final isar = await _db;
-    await Future.delayed(Duration(milliseconds: delayed));
-    yield* isar.saves
-        .where()
-        .sortByCreateDateTimeDesc()
-        .watch(fireImmediately: true);
-  }
-
-  Future<void> deleteSaveById(int id) async {
-    final isar = await _db;
-    await isar.writeTxn(() => isar.saves.delete(id));
-  }
-
   /// 清除数据库
   Future<void> cleanDb() async {
     final isar = await _db;
     await isar.writeTxn(() => isar.clear());
+  }
+
+  Future<Room?> getRoomById(Id roomId) async {
+    final isar = await _db;
+    return isar.rooms.filter().idEqualTo(roomId).findFirst();
   }
 
   /// 打开数据库
@@ -44,7 +28,7 @@ class IsarService {
       ChatLife.printLog(dir);
 
       final isar = await Isar.open(
-        [SaveSchema],
+        [MessageSchema, RoomSchema],
         inspector: true,
         name: ChatLife.database,
         directory: dir.path,
