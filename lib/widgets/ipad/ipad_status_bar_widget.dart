@@ -4,12 +4,10 @@ class IpadStatusBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   const IpadStatusBarWidget({
     super.key,
-    required this.dateTime,
-    this.backgroundColor,
+    required this.ipadStatus,
   });
 
-  final DateTime dateTime;
-  final Color? backgroundColor;
+  final IpadStatus ipadStatus;
 
   @override
   Size get preferredSize => const Size(double.infinity, 40);
@@ -18,13 +16,15 @@ class IpadStatusBarWidget extends StatelessWidget
   Widget build(BuildContext context) {
     final String lang = Localizations.localeOf(context).toLanguageTag();
 
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     const TextStyle style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 12,
     );
 
     return Container(
-      color: backgroundColor,
+      color: colorScheme.background,
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onPanStart: (_) => windowManager.startDragging(),
@@ -40,27 +40,30 @@ class IpadStatusBarWidget extends StatelessWidget
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
-                    dateTime.format(DateFormat.HOUR24_MINUTE, lang),
+                    ipadStatus.dateTime.format(DateFormat.HOUR24_MINUTE, lang),
                     style: style,
                   ),
                   Text(
-                    dateTime.format(DateFormat.ABBR_MONTH_WEEKDAY_DAY, lang),
+                    ipadStatus.dateTime
+                        .format(DateFormat.ABBR_MONTH_WEEKDAY_DAY, lang),
                     style: style,
                   )
                 ],
               ),
             ),
             const Icon(Icons.more_horiz_rounded),
-            const Padding(
-              padding: EdgeInsets.only(right: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
               child: Wrap(
                 spacing: 4.0,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Icon(CupertinoIcons.wifi, size: 16),
-                  Icon(CupertinoIcons.lock_rotation, size: 12),
-                  Text('100%', style: style),
-                  Icon(CupertinoIcons.battery_100, size: 20),
+                  const Icon(CupertinoIcons.wifi, size: 16),
+                  const Icon(CupertinoIcons.lock_rotation, size: 12),
+                  Text('${ipadStatus.battery}%', style: style),
+                  IpadBatteryWidget(
+                    value: ipadStatus.battery / 100,
+                  ),
                 ],
               ),
             ),

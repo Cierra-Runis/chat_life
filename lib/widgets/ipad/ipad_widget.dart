@@ -12,12 +12,9 @@ class IpadWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: IpadStatusBarWidget(
-        dateTime: dateTime,
-        backgroundColor: colorScheme.surface,
+        ipadStatus: IpadStatus(dateTime: dateTime, battery: 10),
       ),
       body: Stack(
         children: [
