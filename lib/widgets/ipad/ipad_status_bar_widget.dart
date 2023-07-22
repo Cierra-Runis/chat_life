@@ -1,7 +1,8 @@
 import 'package:chat_life/index.dart';
 
-class StatusBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const StatusBarWidget({
+class IpadStatusBarWidget extends StatelessWidget
+    implements PreferredSizeWidget {
+  const IpadStatusBarWidget({
     super.key,
     required this.dateTime,
     this.backgroundColor,

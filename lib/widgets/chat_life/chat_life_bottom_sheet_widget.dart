@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatBottomSheetWidget extends StatelessWidget {
-  const ChatBottomSheetWidget({
+class ChatLifeBottomSheetWidget extends StatelessWidget {
+  const ChatLifeBottomSheetWidget({
     super.key,
     required this.user,
   });
@@ -19,7 +19,7 @@ class ChatBottomSheetWidget extends StatelessWidget {
           child: Center(
             child: Row(
               children: [
-                AvatarWidget(icon: user.icon),
+                BaseAvatarWidget(icon: user.icon),
               ],
             ),
           ),

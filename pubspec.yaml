@@ -26,6 +26,7 @@ dependencies:
   json_annotation: ^4.8.1
   path_provider: ^2.0.15
   riverpod_annotation: ^2.1.1 # 状态管理相关 [https://pub.dev/packages/riverpod_annotation]
+  star_menu: ^3.1.4
   url_launcher: ^6.1.12
   unicons: ^2.1.1 # 图标 [https://pub.dev/packages/unicons]
   window_manager: ^0.3.4

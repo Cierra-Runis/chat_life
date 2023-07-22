@@ -1,10 +1,10 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifePageRouteWidget<T> extends PageRouteBuilder<T> {
+class BasePageRouteWidget<T> extends PageRouteBuilder<T> {
   final Widget page;
   final bool linearTransition;
 
-  ChatLifePageRouteWidget({
+  BasePageRouteWidget({
     required this.page,
     super.transitionDuration = const Duration(milliseconds: 500),
     this.linearTransition = false,

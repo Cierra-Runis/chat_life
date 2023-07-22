@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatListItem extends StatelessWidget {
-  const ChatListItem({
+class ChatRoomListItemWidget extends StatelessWidget {
+  const ChatRoomListItemWidget({
     super.key,
     required this.user,
     required this.room,
@@ -12,12 +12,12 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chatViewWidget = ChatViewWidget(room: room);
+    final chatViewWidget = ChatRoomWidget(room: room);
 
     final messages = room.messages.toList();
 
-    return MercuriusListItemWidget(
-      icon: AvatarWidget(icon: room.icon),
+    return BaseListItemWidget(
+      icon: BaseAvatarWidget(icon: room.icon),
       titleText: room.title,
       summaryText: messages.lastOrNull?.content ?? '',
       accessoryView: Column(
@@ -47,7 +47,7 @@ class ChatListItem extends StatelessWidget {
           );
         } else {
           chatAppGlobalKey.currentState?.pushReplacement(
-            ChatLifePageRouteWidget(page: chatViewWidget),
+            BasePageRouteWidget(page: chatViewWidget),
           );
         }
       },

@@ -17,7 +17,7 @@ class ChatLife {
 
     await windowsInit();
 
-    runApp(const ProviderScope(child: ChatLifeApp()));
+    runApp(const ProviderScope(child: RootWidget()));
   }
 
   static void printLog(dynamic newLog) {

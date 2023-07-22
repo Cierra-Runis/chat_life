@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class MercuriusFadeShimmerWidget extends StatefulWidget {
-  const MercuriusFadeShimmerWidget({
+class BaseFadeShimmerWidget extends StatefulWidget {
+  const BaseFadeShimmerWidget({
     super.key,
     this.millisecondsDelay = 0,
     this.radius = 0,
@@ -21,7 +21,7 @@ class MercuriusFadeShimmerWidget extends StatefulWidget {
   final int millisecondsDelay;
 
   /// 用它来创建一个圆形加载小部件
-  const MercuriusFadeShimmerWidget.round({
+  const BaseFadeShimmerWidget.round({
     super.key,
     required double size,
     this.millisecondsDelay = 0,
@@ -32,12 +32,10 @@ class MercuriusFadeShimmerWidget extends StatefulWidget {
         radius = size / 2;
 
   @override
-  State<MercuriusFadeShimmerWidget> createState() =>
-      _MercuriusFadeShimmerWidgetState();
+  State<BaseFadeShimmerWidget> createState() => _BaseFadeShimmerWidgetState();
 }
 
-class _MercuriusFadeShimmerWidgetState
-    extends State<MercuriusFadeShimmerWidget> {
+class _BaseFadeShimmerWidgetState extends State<BaseFadeShimmerWidget> {
   static final isHighLightStream = Stream<bool>.periodic(
     const Duration(seconds: 1),
     (x) => x % 2 == 0,
@@ -74,6 +72,7 @@ class _MercuriusFadeShimmerWidgetState
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedContainer(
       curve: Curves.easeInOut,
       duration: const Duration(milliseconds: 800),
@@ -81,8 +80,8 @@ class _MercuriusFadeShimmerWidgetState
       height: widget.height,
       decoration: BoxDecoration(
         color: _isHighLight
-            ? Theme.of(context).colorScheme.outline.withOpacity(0.4)
-            : Theme.of(context).colorScheme.outline.withOpacity(0.1),
+            ? colorScheme.outline.withOpacity(0.4)
+            : colorScheme.outline.withOpacity(0.1),
         borderRadius: BorderRadius.circular(widget.radius),
       ),
       alignment: widget.childAlignment,

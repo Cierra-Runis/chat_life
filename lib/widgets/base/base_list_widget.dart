@@ -1,11 +1,11 @@
 import 'package:chat_life/index.dart';
 
-class MercuriusListWidget extends StatelessWidget {
+class BaseListWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final List<Widget> children;
   final bool shrinkWrap;
 
-  const MercuriusListWidget({
+  const BaseListWidget({
     super.key,
     this.padding,
     this.children = const <Widget>[],

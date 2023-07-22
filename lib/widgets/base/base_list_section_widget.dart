@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class MercuriusListSectionWidget extends StatelessWidget {
-  const MercuriusListSectionWidget({
+class BaseListSectionWidget extends StatelessWidget {
+  const BaseListSectionWidget({
     super.key,
     this.title,
     this.summary,

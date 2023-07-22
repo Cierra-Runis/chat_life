@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatAppWidget extends StatelessWidget {
-  const ChatAppWidget({
+class ChatLifeSubRightWidget extends StatelessWidget {
+  const ChatLifeSubRightWidget({
     super.key,
   });
 
@@ -12,7 +12,7 @@ class ChatAppWidget extends StatelessWidget {
     return Expanded(
       flex: 3,
       child: ClipRect(
-        child: ChatLifeBaseAppWidget(
+        child: BaseAppWidget(
           navigatorKey: chatAppGlobalKey,
           colorScheme: colorScheme,
           home: const Scaffold(body: Center(child: ChatLifeLogoWidget())),

@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatChipWidget extends StatelessWidget {
-  const ChatChipWidget({
+class BaseChipWidget extends StatelessWidget {
+  const BaseChipWidget({
     super.key,
     required this.iconData,
     required this.label,

@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeBaseAppWidget extends StatelessWidget {
-  const ChatLifeBaseAppWidget({
+class BaseAppWidget extends StatelessWidget {
+  const BaseAppWidget({
     super.key,
     required this.navigatorKey,
     required this.colorScheme,

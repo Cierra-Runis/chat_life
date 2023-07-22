@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class IpadWidget extends StatelessWidget {
+  const IpadWidget({
     super.key,
     required this.save,
     required this.dateTime,
@@ -15,14 +15,14 @@ class HomePage extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: StatusBarWidget(
+      appBar: IpadStatusBarWidget(
         dateTime: dateTime,
         backgroundColor: colorScheme.surface,
       ),
       body: Stack(
         children: [
-          ChatLifeChat(save: save, dateTime: dateTime),
-          const DockBarWidget()
+          ChatLifeAppWidget(save: save, dateTime: dateTime),
+          const IpadDockBarWidget()
         ],
       ),
     );

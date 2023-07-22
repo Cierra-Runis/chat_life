@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatDrawerWidget extends StatelessWidget {
-  const ChatDrawerWidget({
+class ChatLifeSubRightDrawerWidget extends StatelessWidget {
+  const ChatLifeSubRightDrawerWidget({
     super.key,
     required this.user,
   });
@@ -15,8 +15,8 @@ class ChatDrawerWidget extends StatelessWidget {
       shape: const BeveledRectangleBorder(),
       child: Column(
         children: [
-          MercuriusListItemWidget(
-            icon: ChatChipWidget(
+          BaseListItemWidget(
+            icon: BaseChipWidget(
               iconData: Icons.calendar_month_rounded,
               label: '今天也是好天气',
               onPressed: () {}, // TODO:
@@ -29,7 +29,7 @@ class ChatDrawerWidget extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  AvatarWidget(
+                  BaseAvatarWidget(
                     icon: user.icon,
                     size: 50,
                   ),
@@ -42,10 +42,12 @@ class ChatDrawerWidget extends StatelessWidget {
                           user.name,
                           style: const TextStyle(fontSize: 18),
                         ),
-                        ChatChipWidget(
+                        BaseChipWidget(
                           iconData: Icons.edit_rounded,
                           label: user.motto,
-                          onPressed: () {}, // TODO:
+                          onPressed: () {
+                            ChatLife.printLog('newLog');
+                          }, // TODO:
                         )
                       ],
                     ),
@@ -53,21 +55,29 @@ class ChatDrawerWidget extends StatelessWidget {
                 ],
               ),
             ),
+            onTap: () => chatAppGlobalKey.currentState?.push(
+              BasePageRouteWidget(
+                page: UserDetailPage(user: user),
+              ),
+            ),
           ),
           Expanded(
-            child: MercuriusListWidget(
+            child: BaseListWidget(
               children: [
-                MercuriusListItemWidget(
+                BaseListItemWidget(
                   iconData: Icons.settings_rounded,
                   titleText: '设置',
-                  onTap: () {}, // TODO:
+                  onTap: () => Navigator.push(
+                    chatAppGlobalKey.currentContext!,
+                    BasePageRouteWidget(page: const SettingPage()),
+                  ),
                 ),
-                MercuriusListItemWidget(
+                BaseListItemWidget(
                   iconData: Icons.info_rounded,
                   titleText: '关于 ${ChatLife.appName}',
                   onTap: () => Navigator.push(
                     chatAppGlobalKey.currentContext!,
-                    ChatLifePageRouteWidget(page: const AboutPage()),
+                    BasePageRouteWidget(page: const AboutPage()),
                   ),
                 ),
               ],

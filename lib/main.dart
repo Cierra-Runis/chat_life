@@ -6,18 +6,18 @@ IsarService isarService = IsarService();
 
 void main() => ChatLife.run();
 
-class ChatLifeApp extends StatelessWidget {
-  const ChatLifeApp({super.key});
+class RootWidget extends StatelessWidget {
+  const RootWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final dateTime = DateTime(2023, 01, 01, 19);
 
-    return ChatLifeBaseAppWidget(
+    return BaseAppWidget(
       navigatorKey: rootAppGlobalKey,
       colorScheme:
           dateTime.isDay ? ChatLife.lightColorScheme : ChatLife.darkColorScheme,
-      home: HomePage(
+      home: IpadWidget(
         save: Save(
           id: 0,
           createDateTime: DateTime.now(),

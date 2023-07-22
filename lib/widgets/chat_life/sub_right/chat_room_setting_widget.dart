@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatViewSettingWidget extends StatelessWidget {
-  const ChatViewSettingWidget({
+class ChatRoomSettingWidget extends StatelessWidget {
+  const ChatRoomSettingWidget({
     super.key,
     required this.room,
   });
@@ -14,11 +14,11 @@ class ChatViewSettingWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: MercuriusListWidget(
+      body: BaseListWidget(
         children: [
-          MercuriusListSectionWidget(
+          BaseListSectionWidget(
             children: [
-              MercuriusListItemWidget(
+              BaseListItemWidget(
                 icon: CircleAvatar(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(40),

@@ -6,7 +6,11 @@ class User {
     required this.icon,
     required this.name,
     required this.motto,
+    required this.cover,
+    required this.likes,
+    required this.status,
     required this.userRooms,
+    required this.contactUsers,
     required this.switchableUserIds,
   });
 
@@ -18,7 +22,15 @@ class User {
 
   final String motto;
 
+  final String cover;
+
+  final int likes;
+
+  final UserStatusType status;
+
   final List<UserRoom> userRooms;
+
+  final List<User> contactUsers;
 
   final List<Id> switchableUserIds;
 }

@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class DockBarWidget extends StatelessWidget {
-  const DockBarWidget({
+class IpadDockBarWidget extends StatelessWidget {
+  const IpadDockBarWidget({
     super.key,
   });
 

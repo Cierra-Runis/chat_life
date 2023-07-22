@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatViewWidget extends StatelessWidget {
-  const ChatViewWidget({
+class ChatRoomWidget extends StatelessWidget {
+  const ChatRoomWidget({
     super.key,
     required this.room,
   });
@@ -29,7 +29,7 @@ class ChatViewWidget extends StatelessWidget {
             onPressed: () => Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (context) => ChatViewSettingWidget(room: room),
+                builder: (context) => ChatRoomSettingWidget(room: room),
               ),
             ),
           )
@@ -43,7 +43,7 @@ class ChatViewWidget extends StatelessWidget {
           ),
           direction: DismissDirection.endToStart,
           confirmDismiss: (direction) async => false,
-          child: MercuriusListItemWidget(
+          child: BaseListItemWidget(
             disabled: true,
             titleText: messages[index].content,
             accessoryView: Container(),

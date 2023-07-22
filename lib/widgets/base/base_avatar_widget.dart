@@ -1,15 +1,17 @@
 import 'package:chat_life/index.dart';
 
-class AvatarWidget extends StatelessWidget {
-  const AvatarWidget({
+class BaseAvatarWidget extends StatelessWidget {
+  const BaseAvatarWidget({
     super.key,
     required this.icon,
+    this.isGrey = false,
     this.size = 40,
     this.onTap,
     this.onLongPress,
   });
 
   final String icon;
+  final bool isGrey;
   final int size;
   final GestureTapCallback? onTap;
   final GestureLongPressCallback? onLongPress;
@@ -26,7 +28,12 @@ class AvatarWidget extends StatelessWidget {
         child: GestureDetector(
           onTap: onTap,
           onLongPress: onLongPress,
-          child: Image.asset(icon, cacheWidth: size),
+          child: Image.asset(
+            icon,
+            cacheWidth: size,
+            color: isGrey ? Colors.grey : null,
+            colorBlendMode: BlendMode.color,
+          ),
         ),
       ),
     );

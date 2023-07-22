@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeChat extends StatelessWidget {
-  const ChatLifeChat({
+class ChatLifeAppWidget extends StatelessWidget {
+  const ChatLifeAppWidget({
     super.key,
     required this.save,
     required this.dateTime,
@@ -14,12 +14,29 @@ class ChatLifeChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ChatListWidget(
+        ChatLifeSubLeftWidget(
           user: User(
             id: 43967184365,
             icon: 'assets/images/chaos.jpg',
             name: 'chaos',
             motto: '存在。存在？',
+            cover: 'assets/images/chaos_cover.jpg',
+            likes: 4529,
+            status: UserStatusType.online,
+            contactUsers: [
+              const User(
+                id: 65715149826,
+                icon: 'assets/images/orange.jpg',
+                name: 'orange',
+                motto: '',
+                cover: '',
+                likes: 12,
+                status: UserStatusType.offline,
+                userRooms: [],
+                contactUsers: [],
+                switchableUserIds: [],
+              ),
+            ],
             switchableUserIds: [
               54284364881,
             ],
@@ -29,7 +46,7 @@ class ChatLifeChat extends StatelessWidget {
             ],
           ),
         ),
-        const ChatAppWidget(),
+        const ChatLifeSubRightWidget(),
       ],
     );
   }

@@ -1,8 +1,8 @@
 import 'package:chat_life/index.dart';
 
-/// [MercuriusListItemWidget] 是由 [StatelessWidget] 衍生出的列表系列组件的基类
-class MercuriusListItemWidget extends StatelessWidget {
-  const MercuriusListItemWidget({
+/// [BaseListItemWidget] 是由 [StatelessWidget] 衍生出的列表系列组件的基类
+class BaseListItemWidget extends StatelessWidget {
+  const BaseListItemWidget({
     super.key,
     this.padding,
     this.icon,
@@ -163,19 +163,21 @@ class MercuriusListItemWidget extends StatelessWidget {
   }
 }
 
-/// 由 [MercuriusListItemWidget] 衍生的组件，其右边被替换为开关
-class MercuriusModifiedListSwitchItem extends MercuriusListItemWidget {
+/// 由 [BaseListItemWidget] 衍生的组件，其右边被替换为开关
+class BaseListSwitchItem extends BaseListItemWidget {
   final bool? value;
   final ValueChanged<bool>? onChanged;
 
-  const MercuriusModifiedListSwitchItem({
+  const BaseListSwitchItem({
     required this.value,
     required this.onChanged,
     super.key,
     super.icon,
     super.iconData,
+    super.title,
     super.titleText,
     super.titleTextStyle,
+    super.summary,
     super.summaryText,
     super.summaryTextStyle,
     super.detailText,
@@ -199,19 +201,21 @@ class MercuriusModifiedListSwitchItem extends MercuriusListItemWidget {
   }
 }
 
-/// 由 [MercuriusListItemWidget] 衍生的组件，其中部被替换为 [TextField] 输入框
-class MercuriusModifiedListTextFieldItem extends MercuriusListItemWidget {
+/// 由 [BaseListItemWidget] 衍生的组件，其中部被替换为 [TextField] 输入框
+class BaseListTextFieldItem extends BaseListItemWidget {
   final String? hintText;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onEditingComplete;
   final ValueChanged<String>? onSubmitted;
 
-  const MercuriusModifiedListTextFieldItem({
+  const BaseListTextFieldItem({
     super.key,
     super.icon,
     super.iconData,
+    super.title,
     super.titleText,
     super.titleTextStyle,
+    super.summary,
     super.summaryText,
     super.summaryTextStyle,
     super.accessoryView = const Padding(

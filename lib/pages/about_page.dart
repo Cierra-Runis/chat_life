@@ -22,7 +22,7 @@ class AboutPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: MercuriusListWidget(
+            child: BaseListWidget(
               children: [
                 Center(
                   child: Column(
@@ -35,9 +35,9 @@ class AboutPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                MercuriusListSectionWidget(
+                BaseListSectionWidget(
                   children: [
-                    MercuriusListItemWidget(
+                    BaseListItemWidget(
                       iconData: UniconsLine.github_alt,
                       titleText: '前往 Github 仓库',
                       summaryText: ChatLife.appGithub,
@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
             child: TextButton(
               onPressed: () => Navigator.push(
                 context,
-                ChatLifePageRouteWidget(
+                BasePageRouteWidget(
                   page: const LicensePage(
                     applicationVersion: ChatLife.appVersion,
                   ),
