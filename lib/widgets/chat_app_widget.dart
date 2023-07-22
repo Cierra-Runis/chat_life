@@ -17,13 +17,24 @@ class ChatAppWidget extends StatelessWidget {
           colorScheme: colorScheme,
           home: Scaffold(
             body: Center(
-              child: Text(
-                ChatLife.appName,
-                style: TextStyle(
-                  fontSize: 72,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.outline,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/icon.svg',
+                    width: 128,
+                    colorFilter:
+                        ColorFilter.mode(colorScheme.outline, BlendMode.srcIn),
+                  ),
+                  Text(
+                    ChatLife.appName,
+                    style: TextStyle(
+                      fontSize: 72,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.outline,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

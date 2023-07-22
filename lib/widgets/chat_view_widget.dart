@@ -10,13 +10,18 @@ class ChatViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String memberCount =
+        room.type == RoomType.group ? '(${room.userIds.length})' : '';
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () =>
-              Navigator.popUntil(context, (route) => route.isFirst),
+          onPressed: () => Navigator.popUntil(
+            context,
+            (route) => route.isFirst,
+          ),
         ),
-        title: Text(room.title),
+        title: Text(room.title + memberCount),
         centerTitle: true,
         actions: [
           EndDrawerButton(
@@ -40,6 +45,7 @@ class ChatViewWidget extends StatelessWidget {
           child: MercuriusListItemWidget(
             disabled: true,
             titleText: [...room.messages, ...room.unreadMessages][index],
+            accessoryView: Container(),
           ),
         ),
       ),

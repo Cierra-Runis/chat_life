@@ -16,9 +16,13 @@ class ChatLifeChat extends StatelessWidget {
       children: [
         ChatListWidget(
           user: User(
-            uuid: 43967184365,
+            id: 43967184365,
             icon: 'assets/images/chaos.jpg',
             name: 'chaos',
+            switchableUserIds: [
+              54284364881,
+            ],
+            roomIds: [],
           ),
         ),
         ChatAppWidget(),

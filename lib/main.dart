@@ -11,7 +11,7 @@ class ChatLifeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateTime = DateTime(2023, 01, 01, 19);
+    final dateTime = DateTime(2023, 01, 01, 17);
 
     return ChatLifeBaseAppWidget(
       navigatorKey: chatLifeAppGlobalKey,

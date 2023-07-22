@@ -7,6 +7,7 @@ class MercuriusListItemWidget extends StatelessWidget {
     this.padding,
     this.icon,
     this.iconData,
+    this.title,
     this.titleText,
     this.titleTextStyle,
     this.summaryText,
@@ -26,6 +27,7 @@ class MercuriusListItemWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final Widget? icon;
   final IconData? iconData;
+  final Widget? title;
   final String? titleText;
   final TextStyle? titleTextStyle;
   final String? summaryText;
@@ -114,40 +116,38 @@ class MercuriusListItemWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (titleText != null || summaryText != null)
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (titleText != null)
-                          Badge(
-                            showBadge: showTitleTextBadge ?? false,
-                            child: Text(
-                              titleText ?? '',
-                              style: titleTextStyle ??
-                                  const TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: 'Saira',
-                                  ),
-                            ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (titleText != null)
+                        Badge(
+                          showBadge: showTitleTextBadge ?? false,
+                          child: Text(
+                            titleText ?? '',
+                            style: titleTextStyle ??
+                                const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Saira',
+                                ),
                           ),
-                        if (summaryText != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4, bottom: 4),
-                            child: Text(
-                              summaryText ?? '',
-                              style: summaryTextStyle ??
-                                  TextStyle(
-                                    fontSize: 12,
-                                    color:
-                                        Theme.of(context).colorScheme.outline,
-                                  ),
-                            ),
+                        ),
+                      if (summaryText != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4, bottom: 4),
+                          child: Text(
+                            summaryText ?? '',
+                            style: summaryTextStyle ??
+                                TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context).colorScheme.outline,
+                                ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
+                ),
                 buildDetailText(context),
                 buildAccessoryView(context),
               ],

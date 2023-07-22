@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           ChatLifeChat(save: save, dateTime: dateTime),
-          const DockBarWidget(),
+          const DockBarWidget()
         ],
       ),
     );
