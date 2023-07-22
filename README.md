@@ -51,4 +51,4 @@
   
  [![License](https://img.shields.io/github/license/Cierra-Runis/chat_life)](https://github.com/Cierra-Runis/chat_life/blob/master/LICENSE) 
   
- 该项目采用 `MIT` 许可协议，查看 [LICENSE](https://github.com/Cierra-Runis/chat_life/blob/master/LICENSE) 以获得更多信息
+ 该项目采用 `GPL-3.0` 许可协议，查看 [LICENSE](https://github.com/Cierra-Runis/chat_life/blob/master/LICENSE) 以获得更多信息
