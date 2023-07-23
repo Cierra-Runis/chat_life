@@ -19,10 +19,8 @@ class ChatPersonListItemWidget extends StatelessWidget {
       ),
       titleText: person.name,
       summaryText: '[${person.status.label}] ${person.motto}',
-      onTap: () => chatAppGlobalKey.currentState?.push(
-        BasePageRouteWidget(
-          page: UserDetailPage(user: person),
-        ),
+      onTap: () => chatLifeSubAppGlobalKey.pushBase(
+        UserDetailPage(user: person),
       ),
     );
   }

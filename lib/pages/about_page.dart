@@ -12,10 +12,7 @@ class AboutPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () => Navigator.popUntil(
-            context,
-            (route) => route.isFirst,
-          ),
+          onPressed: chatLifeSubAppGlobalKey.popToRoot,
         ),
         title: const Text('关于 ${ChatLife.appName}'),
       ),
@@ -54,12 +51,9 @@ class AboutPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 32.0),
             child: TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                BasePageRouteWidget(
-                  page: const LicensePage(
-                    applicationVersion: ChatLife.appVersion,
-                  ),
+              onPressed: () => chatLifeSubAppGlobalKey.pushBase(
+                const LicensePage(
+                  applicationVersion: ChatLife.appVersion,
                 ),
               ),
               child: const Text('许可'),

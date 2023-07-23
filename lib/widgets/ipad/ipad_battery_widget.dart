@@ -16,7 +16,7 @@ import 'package:chat_life/index.dart';
 class IpadBatteryWidget extends StatelessWidget {
   const IpadBatteryWidget({
     super.key,
-    required this.value,
+    required this.batteryStatus,
     this.trackHeight = 12.0,
     this.trackPadding = 1.0,
     this.trackColor,
@@ -34,7 +34,7 @@ class IpadBatteryWidget extends StatelessWidget {
         assert(trackAspectRatio >= 1, '轨道纵横比必须 >= 1');
 
   /// 显示的值，区间为 [0, 1]
-  final double value;
+  final BatteryStatus batteryStatus;
 
   /// The height of the track (i.e. container).
   final double trackHeight;
@@ -186,7 +186,7 @@ class IpadBatteryWidget extends StatelessWidget {
   }
 
   Widget _buildBar(BuildContext context, double trackWidth) {
-    final width = (trackWidth - trackPadding * 2.0) * value;
+    final width = (trackWidth - trackPadding * 2.0) * batteryStatus.value;
     final borderRadius = barBorderRadius ?? BorderRadius.circular(1.5);
     final currentColor = _getCurrentBarColor(context);
 

@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeSubLeftWidget extends StatefulWidget {
-  const ChatLifeSubLeftWidget({
+class ChatLifeSideBarWidget extends StatefulWidget {
+  const ChatLifeSideBarWidget({
     super.key,
     required this.user,
   });
@@ -9,10 +9,10 @@ class ChatLifeSubLeftWidget extends StatefulWidget {
   final User user;
 
   @override
-  State<ChatLifeSubLeftWidget> createState() => _ChatLifeSubLeftWidgetState();
+  State<ChatLifeSideBarWidget> createState() => _ChatLifeSideBarWidgetState();
 }
 
-class _ChatLifeSubLeftWidgetState extends State<ChatLifeSubLeftWidget> {
+class _ChatLifeSideBarWidgetState extends State<ChatLifeSideBarWidget> {
   int _selectedIndex = 0;
 
   @override
@@ -24,27 +24,7 @@ class _ChatLifeSubLeftWidgetState extends State<ChatLifeSubLeftWidget> {
       flex: 1,
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Builder(
-              builder: (context) => BaseAvatarWidget(
-                icon: widget.user.icon,
-                onTap: Scaffold.of(context).openDrawer,
-                onLongPress: () {
-                  chatAppGlobalKey.currentState?.popUntil(
-                    (route) => route.isFirst,
-                  );
-                  showModalBottomSheet(
-                    context: chatAppGlobalKey.currentContext!,
-                    showDragHandle: true,
-                    builder: (context) => ChatLifeBottomSheetWidget(
-                      user: widget.user,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+          leading: ChatLifeSideBarAvatarWidget(user: widget.user),
           centerTitle: false,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,14 +60,14 @@ class _ChatLifeSubLeftWidgetState extends State<ChatLifeSubLeftWidget> {
               ),
               items: [
                 BaseChipWidget(
-                  iconData: Icons.add_comment_rounded,
                   label: '创建群聊',
-                  onPressed: () {},
+                  leadingIconData: Icons.add_comment_rounded,
+                  onTap: () {},
                 ),
                 BaseChipWidget(
-                  iconData: Icons.person_add_alt_1_outlined,
                   label: '加好友/群',
-                  onPressed: () {},
+                  leadingIconData: Icons.person_add_alt_1_outlined,
+                  onTap: () {},
                 ),
               ],
               child: const Padding(
@@ -97,7 +77,7 @@ class _ChatLifeSubLeftWidgetState extends State<ChatLifeSubLeftWidget> {
             )
           ],
         ),
-        drawer: ChatLifeSubRightDrawerWidget(user: widget.user),
+        drawer: ChatLifeSideBarDrawerWidget(user: widget.user),
         backgroundColor: colorScheme.surface,
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -121,10 +101,37 @@ class _ChatLifeSubLeftWidgetState extends State<ChatLifeSubLeftWidget> {
             )
           ],
           onDestinationSelected: (value) {
-            chatAppGlobalKey.currentState?.popUntil((route) => route.isFirst);
+            chatLifeSubAppGlobalKey.popToRoot();
             setState(() => _selectedIndex = value);
           },
         ),
+      ),
+    );
+  }
+}
+
+class ChatLifeSideBarAvatarWidget extends StatelessWidget {
+  const ChatLifeSideBarAvatarWidget({
+    super.key,
+    required this.user,
+  });
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0),
+      child: BaseAvatarWidget(
+        icon: user.icon,
+        onTap: Scaffold.of(context).openDrawer,
+        onLongPress: () {
+          chatLifeAppGlobalKey.showSheet(
+            ChatLifeBottomSheetWidget(
+              user: user,
+            ),
+          );
+        },
       ),
     );
   }

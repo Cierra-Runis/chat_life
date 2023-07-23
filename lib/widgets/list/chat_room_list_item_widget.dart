@@ -40,15 +40,10 @@ class ChatRoomListItemWidget extends StatelessWidget {
         ],
       ),
       onTap: () {
-        bool isRoot = chatAppGlobalKey.currentState?.canPop() == false;
-        if (isRoot) {
-          chatAppGlobalKey.currentState?.push(
-            CupertinoPageRoute<void>(builder: (context) => chatViewWidget),
-          );
+        if (chatLifeSubAppGlobalKey.canPop()) {
+          chatLifeSubAppGlobalKey.pushCupertino(chatViewWidget);
         } else {
-          chatAppGlobalKey.currentState?.pushReplacement(
-            BasePageRouteWidget(page: chatViewWidget),
-          );
+          chatLifeSubAppGlobalKey.pushBaseReplace(chatViewWidget);
         }
       },
     );

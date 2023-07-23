@@ -8,10 +8,7 @@ class SettingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () => Navigator.popUntil(
-            context,
-            (route) => route.isFirst,
-          ),
+          onPressed: chatLifeSubAppGlobalKey.popToRoot,
         ),
         title: const Text('设置'),
       ),

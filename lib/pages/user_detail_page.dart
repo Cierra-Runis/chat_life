@@ -12,10 +12,7 @@ class UserDetailPage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             leading: BackButton(
-              onPressed: () => Navigator.popUntil(
-                context,
-                (route) => route.isFirst,
-              ),
+              onPressed: chatLifeSubAppGlobalKey.popToRoot,
             ),
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(

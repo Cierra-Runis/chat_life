@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeSubRightDrawerWidget extends StatelessWidget {
-  const ChatLifeSubRightDrawerWidget({
+class ChatLifeSideBarDrawerWidget extends StatelessWidget {
+  const ChatLifeSideBarDrawerWidget({
     super.key,
     required this.user,
   });
@@ -17,9 +17,9 @@ class ChatLifeSubRightDrawerWidget extends StatelessWidget {
         children: [
           BaseListItemWidget(
             icon: BaseChipWidget(
-              iconData: Icons.calendar_month_rounded,
               label: '今天也是好天气',
-              onPressed: () {}, // TODO:
+              leadingIconData: Icons.calendar_month_rounded,
+              onTap: () {}, // TODO:
             ),
             accessoryView: const CloseButton(),
             bottomView: Padding(
@@ -43,11 +43,9 @@ class ChatLifeSubRightDrawerWidget extends StatelessWidget {
                           style: const TextStyle(fontSize: 18),
                         ),
                         BaseChipWidget(
-                          iconData: Icons.edit_rounded,
                           label: user.motto,
-                          onPressed: () {
-                            ChatLife.printLog('newLog');
-                          }, // TODO:
+                          leadingIconData: Icons.edit_rounded,
+                          onTap: () {}, // TODO:
                         )
                       ],
                     ),
@@ -55,10 +53,8 @@ class ChatLifeSubRightDrawerWidget extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => chatAppGlobalKey.currentState?.push(
-              BasePageRouteWidget(
-                page: UserDetailPage(user: user),
-              ),
+            onTap: () => chatLifeSubAppGlobalKey.pushBase(
+              UserDetailPage(user: user),
             ),
           ),
           Expanded(
@@ -67,17 +63,15 @@ class ChatLifeSubRightDrawerWidget extends StatelessWidget {
                 BaseListItemWidget(
                   iconData: Icons.settings_rounded,
                   titleText: '设置',
-                  onTap: () => Navigator.push(
-                    chatAppGlobalKey.currentContext!,
-                    BasePageRouteWidget(page: const SettingPage()),
+                  onTap: () => chatLifeSubAppGlobalKey.pushBase(
+                    const SettingPage(),
                   ),
                 ),
                 BaseListItemWidget(
                   iconData: Icons.info_rounded,
                   titleText: '关于 ${ChatLife.appName}',
-                  onTap: () => Navigator.push(
-                    chatAppGlobalKey.currentContext!,
-                    BasePageRouteWidget(page: const AboutPage()),
+                  onTap: () => chatLifeSubAppGlobalKey.pushBase(
+                    const AboutPage(),
                   ),
                 ),
               ],

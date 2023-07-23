@@ -27,8 +27,14 @@ class IpadStatusBarWidget extends StatelessWidget
       color: colorScheme.background,
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
+        onDoubleTap: () async {
+          if (await windowManager.isMaximized()) {
+            windowManager.unmaximize();
+          } else {
+            windowManager.maximize();
+          }
+        },
         onPanStart: (_) => windowManager.startDragging(),
-        onDoubleTap: windowManager.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +57,47 @@ class IpadStatusBarWidget extends StatelessWidget
                 ],
               ),
             ),
-            const Icon(Icons.more_horiz_rounded),
+            StarMenu(
+              params: StarMenuParameters.dropdown(context).copyWith(
+                boundaryBackground: BoundaryBackground(
+                  blurSigmaX: 18,
+                  blurSigmaY: 18,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: colorScheme.outlineVariant.withAlpha(128),
+                  ),
+                ),
+                linearShapeParams: const LinearShapeParams(
+                  space: 4,
+                  angle: -90,
+                ),
+                centerOffset: const Offset(0, 40),
+                closeDurationMs: 200,
+              ),
+              lazyItems: () async {
+                bool isFullScreen = await windowManager.isFullScreen();
+                return [
+                  BaseChipWidget(
+                    label: '全屏幕',
+                    labelWidth: 160,
+                    leadingIconData:
+                        isFullScreen ? CupertinoIcons.check_mark : null,
+                    tracingIconData: Icons.crop_5_4_rounded,
+                    onTap: () => windowManager.setFullScreen(!isFullScreen),
+                  ),
+                  BaseChipWidget(
+                    label: '关闭',
+                    labelWidth: 160,
+                    labelColor: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    tracingIconData: Icons.close_rounded,
+                    tracingIconColor: Colors.red,
+                    onTap: windowManager.close,
+                  ),
+                ];
+              },
+              child: const Icon(CupertinoIcons.ellipsis),
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: Wrap(
@@ -60,9 +106,9 @@ class IpadStatusBarWidget extends StatelessWidget
                 children: [
                   const Icon(CupertinoIcons.wifi, size: 16),
                   const Icon(CupertinoIcons.lock_rotation, size: 12),
-                  Text('${ipadStatus.battery}%', style: style),
+                  Text('${ipadStatus.batteryStatus.value}%', style: style),
                   IpadBatteryWidget(
-                    value: ipadStatus.battery / 100,
+                    batteryStatus: ipadStatus.batteryStatus,
                   ),
                 ],
               ),

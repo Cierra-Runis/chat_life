@@ -14,7 +14,13 @@ class IpadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: IpadStatusBarWidget(
-        ipadStatus: IpadStatus(dateTime: dateTime, battery: 10),
+        ipadStatus: IpadStatus(
+          dateTime: dateTime,
+          batteryStatus: const BatteryStatus(
+            value: 100,
+            type: BatteryStatusType.normal,
+          ),
+        ),
       ),
       body: Stack(
         children: [

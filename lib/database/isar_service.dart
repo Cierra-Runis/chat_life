@@ -11,7 +11,7 @@ class IsarService {
   /// 清除数据库
   Future<void> cleanDb() async {
     final isar = await _db;
-    await isar.writeTxn(() => isar.clear());
+    await isar.writeTxn(isar.clear);
   }
 
   Future<Room?> getRoomById(Id roomId) async {
@@ -22,10 +22,8 @@ class IsarService {
   /// 打开数据库
   Future<Isar> openDB() async {
     if (Isar.instanceNames.isEmpty) {
-      /// TIPS: 对 Windows 而言为 C:\Users\{user_name}\Documents/ChatLife/
+      /// TIPS: 对 Windows 而言为 C:\Users\{user_name}\AppData\Roaming\pers.cierra_runis\chat_life'
       Directory dir = await getApplicationSupportDirectory();
-
-      ChatLife.printLog(dir);
 
       final isar = await Isar.open(
         [MessageSchema, RoomSchema],

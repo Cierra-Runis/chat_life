@@ -17,11 +17,12 @@ class ChatLife {
 
     await windowsInit();
 
-    runApp(const ProviderScope(child: RootWidget()));
+    runApp(const RootWidget());
   }
 
   static void printLog(dynamic newLog) {
-    devtools.log('[$appName] $newLog');
+    final time = DateTime.now().format(DateFormat.HOUR24_MINUTE_SECOND);
+    devtools.log('[$appName $time] $newLog');
   }
 
   static Future<void> windowsInit() async {
@@ -30,12 +31,14 @@ class ChatLife {
       title: ChatLife.appName,
       size: Size(1280, 894),
       minimumSize: Size(1280, 894),
-      maximumSize: Size(1280, 894),
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
     );
+
+    await windowManager.setAspectRatio(1280 / 894);
+
     await windowManager.waitUntilReadyToShow(windowOptions, () {
       windowManager.show();
       windowManager.focus();

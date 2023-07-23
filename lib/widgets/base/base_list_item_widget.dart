@@ -23,6 +23,7 @@ class BaseListItemWidget extends StatelessWidget {
     this.bottomView,
     this.disabled = false,
     this.onTap,
+    this.width,
   });
 
   final EdgeInsets? padding;
@@ -44,6 +45,7 @@ class BaseListItemWidget extends StatelessWidget {
   final Widget? bottomView;
   final bool disabled;
   final VoidCallback? onTap;
+  final double? width;
 
   void _onTap() {
     if (onTap != null) onTap!();
@@ -84,12 +86,12 @@ class BaseListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: disabled ? null : () => _onTap(),
+      onTap: disabled ? null : _onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: double.infinity,
+            width: width ?? double.infinity,
             constraints: const BoxConstraints(
               minHeight: 56.0,
             ),

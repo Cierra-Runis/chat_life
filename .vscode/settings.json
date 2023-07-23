@@ -22,6 +22,7 @@
     "chatview",
     "Cupertino",
     "fluttericon",
+    "fullscreen",
     "horiz",
     "LTRB",
     "Mercurius",
@@ -30,6 +31,8 @@
     "trackpad",
     "Typer",
     "typicons",
-    "unicons"
+    "unicons",
+    "unmaximize",
+    "xmark"
   ]
 }

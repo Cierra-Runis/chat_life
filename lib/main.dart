@@ -1,7 +1,9 @@
 import 'package:chat_life/index.dart';
 
-GlobalKey<NavigatorState> rootAppGlobalKey = GlobalKey<NavigatorState>();
-GlobalKey<NavigatorState> chatAppGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> iPadGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> chatLifeAppGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> chatLifeSubAppGlobalKey = GlobalKey<NavigatorState>();
+
 IsarService isarService = IsarService();
 
 void main() => ChatLife.run();
@@ -14,7 +16,7 @@ class RootWidget extends StatelessWidget {
     final dateTime = DateTime(2023, 01, 01, 19);
 
     return BaseAppWidget(
-      navigatorKey: rootAppGlobalKey,
+      navigatorKey: iPadGlobalKey,
       colorScheme:
           dateTime.isDay ? ChatLife.lightColorScheme : ChatLife.darkColorScheme,
       home: IpadWidget(
