@@ -7,8 +7,8 @@ class ChatRoomListItemShimmerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return BaseListItemWidget(
+    return LayoutBuilder(
+      builder: (context, constraints) => BaseListItemWidget(
         icon: const BaseFadeShimmerWidget.round(size: 40),
         title: BaseFadeShimmerWidget(
           width: constraints.maxWidth / 5,
@@ -30,7 +30,7 @@ class ChatRoomListItemShimmerWidget extends StatelessWidget {
             BaseFadeShimmerWidget.round(size: 10)
           ],
         ),
-      );
-    });
+      ),
+    );
   }
 }
