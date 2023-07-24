@@ -30,14 +30,12 @@ class ChatLife {
     WindowOptions windowOptions = const WindowOptions(
       title: ChatLife.appName,
       size: Size(1280, 894),
-      minimumSize: Size(1280, 894),
+      minimumSize: Size(894 / 2, 894),
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
     );
-
-    await windowManager.setAspectRatio(1280 / 894);
 
     await windowManager.waitUntilReadyToShow(windowOptions, () {
       windowManager.show();

@@ -22,10 +22,10 @@ class IpadWidget extends StatelessWidget {
           ),
         ),
       ),
-      body: Stack(
+      body: const Stack(
         children: [
-          ChatLifeAppWidget(save: save, dateTime: dateTime),
-          const IpadDockBarWidget()
+          ChatLifeSplitViewWidget(),
+          IpadDockBarWidget(),
         ],
       ),
     );

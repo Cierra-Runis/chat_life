@@ -17,13 +17,10 @@ class ChatRoomWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: chatLifeSubAppGlobalKey.popToRoot,
-        ),
         title: Text(room.title + memberCount),
         actions: [
           EndDrawerButton(
-            onPressed: () => chatLifeSubAppGlobalKey.pushCupertino(
+            onPressed: () => BaseSplitViewWidget.of(context).push(
               ChatRoomSettingWidget(
                 room: room,
               ),

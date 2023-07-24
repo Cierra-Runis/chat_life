@@ -60,8 +60,8 @@ class IpadStatusBarWidget extends StatelessWidget
             StarMenu(
               params: StarMenuParameters.dropdown(context).copyWith(
                 boundaryBackground: BoundaryBackground(
-                  blurSigmaX: 18,
-                  blurSigmaY: 18,
+                  blurSigmaX: 4,
+                  blurSigmaY: 4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
                     color: colorScheme.outlineVariant.withAlpha(128),

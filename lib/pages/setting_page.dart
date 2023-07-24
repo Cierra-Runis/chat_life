@@ -7,9 +7,6 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: chatLifeSubAppGlobalKey.popToRoot,
-        ),
         title: const Text('设置'),
       ),
     );

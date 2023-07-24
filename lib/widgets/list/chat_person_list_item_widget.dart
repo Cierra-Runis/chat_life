@@ -19,7 +19,7 @@ class ChatPersonListItemWidget extends StatelessWidget {
       ),
       titleText: person.name,
       summaryText: '[${person.status.label}] ${person.motto}',
-      onTap: () => chatLifeSubAppGlobalKey.pushBase(
+      onTap: () => BaseSplitViewWidget.of(context).setSecondary(
         UserDetailPage(user: person),
       ),
     );

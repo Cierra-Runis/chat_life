@@ -39,13 +39,7 @@ class ChatRoomListItemWidget extends StatelessWidget {
           )
         ],
       ),
-      onTap: () {
-        if (chatLifeSubAppGlobalKey.canPop()) {
-          chatLifeSubAppGlobalKey.pushCupertino(chatViewWidget);
-        } else {
-          chatLifeSubAppGlobalKey.pushBaseReplace(chatViewWidget);
-        }
-      },
+      onTap: () => BaseSplitViewWidget.of(context).setSecondary(chatViewWidget),
     );
   }
 }

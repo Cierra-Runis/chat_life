@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeSideBarDrawerWidget extends StatelessWidget {
-  const ChatLifeSideBarDrawerWidget({
+class ChatLifeSplitViewLeftDrawerWidget extends StatelessWidget {
+  const ChatLifeSplitViewLeftDrawerWidget({
     super.key,
     required this.user,
   });
@@ -21,7 +21,7 @@ class ChatLifeSideBarDrawerWidget extends StatelessWidget {
               leadingIconData: Icons.calendar_month_rounded,
               onTap: () {}, // TODO:
             ),
-            accessoryView: const CloseButton(),
+            accessoryView: const BaseDrawerCloseButtonWidget(),
             bottomView: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 8.0,
@@ -53,7 +53,7 @@ class ChatLifeSideBarDrawerWidget extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => chatLifeSubAppGlobalKey.pushBase(
+            onTap: () => BaseSplitViewWidget.of(context).setSecondary(
               UserDetailPage(user: user),
             ),
           ),
@@ -63,14 +63,14 @@ class ChatLifeSideBarDrawerWidget extends StatelessWidget {
                 BaseListItemWidget(
                   iconData: Icons.settings_rounded,
                   titleText: '设置',
-                  onTap: () => chatLifeSubAppGlobalKey.pushBase(
+                  onTap: () => BaseSplitViewWidget.of(context).setSecondary(
                     const SettingPage(),
                   ),
                 ),
                 BaseListItemWidget(
                   iconData: Icons.info_rounded,
                   titleText: '关于 ${ChatLife.appName}',
-                  onTap: () => chatLifeSubAppGlobalKey.pushBase(
+                  onTap: () => BaseSplitViewWidget.of(context).setSecondary(
                     const AboutPage(),
                   ),
                 ),
@@ -79,6 +79,19 @@ class ChatLifeSideBarDrawerWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BaseDrawerCloseButtonWidget extends StatelessWidget {
+  const BaseDrawerCloseButtonWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CloseButton(
+      onPressed: Scaffold.of(context).closeDrawer,
     );
   }
 }

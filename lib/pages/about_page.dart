@@ -11,9 +11,6 @@ class AboutPage extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(
-          onPressed: chatLifeSubAppGlobalKey.popToRoot,
-        ),
         title: const Text('关于 ${ChatLife.appName}'),
       ),
       body: Column(
@@ -51,7 +48,7 @@ class AboutPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 32.0),
             child: TextButton(
-              onPressed: () => chatLifeSubAppGlobalKey.pushBase(
+              onPressed: () => BaseSplitViewWidget.of(context).push(
                 const LicensePage(
                   applicationVersion: ChatLife.appVersion,
                 ),

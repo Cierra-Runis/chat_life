@@ -1,8 +1,7 @@
 import 'package:chat_life/index.dart';
 
 GlobalKey<NavigatorState> iPadGlobalKey = GlobalKey<NavigatorState>();
-GlobalKey<NavigatorState> chatLifeAppGlobalKey = GlobalKey<NavigatorState>();
-GlobalKey<NavigatorState> chatLifeSubAppGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> chatLifeNavigatorKey = GlobalKey<NavigatorState>();
 
 IsarService isarService = IsarService();
 

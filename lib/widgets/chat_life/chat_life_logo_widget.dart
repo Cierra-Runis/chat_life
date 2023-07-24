@@ -9,18 +9,18 @@ class ChatLifeLogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
         SvgPicture.asset(
           'assets/images/icon.svg',
-          width: 128,
+          width: 112,
           colorFilter: ColorFilter.mode(colorScheme.outline, BlendMode.srcIn),
         ),
         Text(
           ChatLife.appName,
           style: TextStyle(
-            fontSize: 72,
+            fontSize: 64,
             fontWeight: FontWeight.bold,
             color: colorScheme.outline,
           ),

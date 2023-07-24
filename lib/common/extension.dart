@@ -13,29 +13,27 @@ extension NumExtension on num {
 extension GlobalNavigatorKeyExtension on GlobalKey<NavigatorState> {
   bool canPop() => currentState?.canPop() == false;
 
-  Future<T?> pushBase<T extends Object?>(Widget page) async {
-    return currentState?.push(BasePageRouteWidget(page: page));
-  }
+  Future<T?> push<T extends Object?>(Widget page) async =>
+      currentState?.push(MaterialPageRoute(builder: (context) => page));
+
+  Future<T?> pushBase<T extends Object?>(Widget page) async =>
+      currentState?.push(BasePageRouteWidget(page: page));
+
+  Future<T?> pushCupertino<T extends Object?>(Widget page) async =>
+      currentState?.push(CupertinoPageRoute(builder: (context) => page));
 
   Future<T?> pushBaseReplace<T extends Object?, TO extends Object?>(
     Widget page, {
     TO? result,
-  }) async {
-    return currentState?.pushReplacement(
-      BasePageRouteWidget(page: page),
-      result: result,
-    );
-  }
+  }) async =>
+      currentState?.pushReplacement(
+        BasePageRouteWidget(page: page),
+        result: result,
+      );
 
-  Future<T?> pushCupertino<T extends Object?>(Widget page) async {
-    return currentState?.push(CupertinoPageRoute(builder: (context) => page));
-  }
+  void popToRoot() => currentState?.popUntil((route) => route.isFirst);
 
-  void popToRoot() {
-    currentState?.popUntil((route) => route.isFirst);
-  }
-
-  Future<T?> showSheet<T>(Widget sheet) async {
+  Future<T?> popupModalBottomSheet<T>(Widget sheet) async {
     if (currentContext == null) return null;
     return showModalBottomSheet(
       context: currentContext!,

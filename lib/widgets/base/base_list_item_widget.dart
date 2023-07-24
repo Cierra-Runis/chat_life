@@ -24,6 +24,7 @@ class BaseListItemWidget extends StatelessWidget {
     this.disabled = false,
     this.onTap,
     this.width,
+    this.minHeight = 56.0,
   });
 
   final EdgeInsets? padding;
@@ -46,6 +47,7 @@ class BaseListItemWidget extends StatelessWidget {
   final bool disabled;
   final VoidCallback? onTap;
   final double? width;
+  final double minHeight;
 
   void _onTap() {
     if (onTap != null) onTap!();
@@ -92,8 +94,8 @@ class BaseListItemWidget extends StatelessWidget {
         children: [
           Container(
             width: width ?? double.infinity,
-            constraints: const BoxConstraints(
-              minHeight: 56.0,
+            constraints: BoxConstraints(
+              minHeight: minHeight,
             ),
             padding: padding ?? const EdgeInsets.fromLTRB(12, 0, 12, 0),
             child: Row(
