@@ -11,10 +11,11 @@ class ChatLifeLogoWidget extends StatelessWidget {
 
     return Wrap(
       alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         SvgPicture.asset(
           'assets/images/icon.svg',
-          width: 112,
+          width: 96,
           colorFilter: ColorFilter.mode(colorScheme.outline, BlendMode.srcIn),
         ),
         Text(

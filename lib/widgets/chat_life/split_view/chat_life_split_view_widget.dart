@@ -25,7 +25,7 @@ class ChatLifeSplitViewWidget extends StatelessWidget {
         child: child,
         fullscreenDialog: fullscreenDialog ?? false,
       ),
-      leftWidget: ChatLifeSplitViewLeftWidget(
+      leftWidget: const ChatLifeSplitViewLeftWidget(
         user: User(
           id: 43967184365,
           icon: 'assets/images/chaos.jpg',
@@ -35,7 +35,7 @@ class ChatLifeSplitViewWidget extends StatelessWidget {
           likes: 4529,
           status: UserStatusType.online,
           contactUsers: [
-            const User(
+            User(
               id: 65715149826,
               icon: 'assets/images/orange.jpg',
               name: 'orange',
@@ -51,10 +51,7 @@ class ChatLifeSplitViewWidget extends StatelessWidget {
           switchableUserIds: [
             54284364881,
           ],
-          userRooms: [
-            UserRoom(id: 0, dateTime: DateTime(2023, 01, 01, 18, 24)),
-            UserRoom(id: 1, dateTime: DateTime(2023, 01, 01, 18, 29)),
-          ],
+          userRooms: [],
         ),
       ),
       rightPlaceholder: const ChatLifeLogoWidget(),

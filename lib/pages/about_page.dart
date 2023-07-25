@@ -51,6 +51,7 @@ class AboutPage extends StatelessWidget {
               onPressed: () => BaseSplitViewWidget.of(context).push(
                 const LicensePage(
                   applicationVersion: ChatLife.appVersion,
+                  applicationIcon: ChatLifeLogoWidget(),
                 ),
               ),
               child: const Text('许可'),

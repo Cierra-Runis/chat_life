@@ -1,6 +1,6 @@
 import 'package:chat_life/index.dart';
 
-GlobalKey<NavigatorState> iPadGlobalKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> ipadGlobalKey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> chatLifeNavigatorKey = GlobalKey<NavigatorState>();
 
 IsarService isarService = IsarService();
@@ -12,20 +12,29 @@ class RootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateTime = DateTime(2023, 01, 01, 19);
-
-    return BaseAppWidget(
-      navigatorKey: iPadGlobalKey,
-      colorScheme:
-          dateTime.isDay ? ChatLife.lightColorScheme : ChatLife.darkColorScheme,
-      home: IpadWidget(
-        save: Save(
-          id: 0,
-          createDateTime: DateTime.now(),
-          latestEditTime: DateTime.now(),
-        ),
-        dateTime: dateTime,
+    return StreamBuilder<DateTime>(
+      stream: Stream.periodic(
+        const Duration(seconds: 1),
+        (_) => DateTime.now(),
       ),
+      builder: (context, snapshot) {
+        return BaseAppWidget(
+          navigatorKey: ipadGlobalKey,
+          colorScheme: (snapshot.data ?? DateTime.now()).isDay
+              ? ChatLife.lightColorScheme
+              : ChatLife.darkColorScheme,
+          home: IpadWidget(
+            ipadStatus: IpadStatus(
+              dateTime: snapshot.data ?? DateTime.now(),
+              batteryStatus: const BatteryStatus(
+                value: 75,
+                type: BatteryStatusType.charging,
+              ),
+            ),
+            currentApp: const ChatLifeSplitViewWidget(),
+          ),
+        );
+      },
     );
   }
 }

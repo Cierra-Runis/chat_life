@@ -6,13 +6,15 @@ class BaseAvatarWidget extends StatelessWidget {
     required this.icon,
     this.isGrey = false,
     this.size = 40,
+    this.radius,
     this.onTap,
     this.onLongPress,
   });
 
   final String icon;
   final bool isGrey;
-  final int size;
+  final double size;
+  final double? radius;
   final GestureTapCallback? onTap;
   final GestureLongPressCallback? onLongPress;
 
@@ -23,14 +25,13 @@ class BaseAvatarWidget extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Material(
         type: MaterialType.card,
-        borderRadius: BorderRadius.circular(size / 2),
+        borderRadius: BorderRadius.circular(radius ?? size),
         clipBehavior: Clip.antiAlias,
         child: GestureDetector(
           onTap: onTap,
           onLongPress: onLongPress,
           child: Image.asset(
             icon,
-            cacheWidth: size,
             color: isGrey ? Colors.grey : null,
             colorBlendMode: BlendMode.color,
           ),

@@ -1,13 +1,15 @@
 import 'package:chat_life/index.dart';
 
 extension DateTimeExtension on DateTime {
-  bool get isDay => isAfter(copyWith(hour: 6)) && isBefore(copyWith(hour: 18));
+  bool get isDay =>
+      !isBefore(copyWith(hour: 6)) && isBefore(copyWith(hour: 18));
 
   Brightness get brightness => isDay ? Brightness.light : Brightness.dark;
 }
 
 extension NumExtension on num {
-  bool between(num a, num b) => a < this && this < b;
+  /// [a, b]
+  bool isIn(num a, num b) => a <= this && this <= b;
 }
 
 extension GlobalNavigatorKeyExtension on GlobalKey<NavigatorState> {

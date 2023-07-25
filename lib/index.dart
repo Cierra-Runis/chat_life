@@ -5,6 +5,7 @@ export 'dart:ui' show ImageFilter, PointerDeviceKind;
 
 export 'package:flutter/cupertino.dart';
 export 'package:flutter/material.dart' hide RefreshCallback, Badge;
+export 'package:flutter/services.dart';
 
 export 'main.dart';
 export 'common/index.dart';

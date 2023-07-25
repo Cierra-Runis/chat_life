@@ -50,12 +50,19 @@ class _ChatLifeSplitViewLeftWidgetState
         actions: [
           StarMenu(
             params: StarMenuParameters.dropdown(context).copyWith(
+              boundaryBackground: BoundaryBackground(
+                blurSigmaX: 4,
+                blurSigmaY: 4,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  color: colorScheme.outlineVariant.withAlpha(32),
+                ),
+              ),
               linearShapeParams: const LinearShapeParams(
                 space: 4,
                 angle: -90,
-                alignment: LinearAlignment.left,
               ),
-              startItemScaleAnimation: 0,
+              centerOffset: const Offset(-40, 40),
               closeDurationMs: 200,
             ),
             items: [
@@ -70,9 +77,9 @@ class _ChatLifeSplitViewLeftWidgetState
                 onTap: () {},
               ),
             ],
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.add_rounded),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add_rounded),
             ),
           )
         ],

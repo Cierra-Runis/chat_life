@@ -17,7 +17,7 @@ class IpadBatteryWidget extends StatelessWidget {
   const IpadBatteryWidget({
     super.key,
     required this.batteryStatus,
-    this.trackHeight = 12.0,
+    this.trackHeight = 10.0,
     this.trackPadding = 1.0,
     this.trackColor,
     this.trackBorderColor,
@@ -33,7 +33,7 @@ class IpadBatteryWidget extends StatelessWidget {
         assert(trackPadding >= 0, '填充必须 >= 0'),
         assert(trackAspectRatio >= 1, '轨道纵横比必须 >= 1');
 
-  /// 显示的值，区间为 [0, 1]
+  /// 电池状态
   final BatteryStatus batteryStatus;
 
   /// The height of the track (i.e. container).
@@ -123,41 +123,25 @@ class IpadBatteryWidget extends StatelessWidget {
 
     final children = [bar];
 
-    final icon = this.icon;
-    if (icon != null) {
-      final outlineColor = iconOutline ?? Colors.white;
-      final outlineSize = iconOutlineBlur ?? 0.0;
+    final icon = batteryStatus.type.isCharing
+        ? const Icon(
+            Icons.electric_bolt,
+            size: 6,
+            color: Colors.amber,
+            shadows: [
+              Shadow(blurRadius: 0.5),
+              Shadow(
+                color: Colors.white,
+                blurRadius: 1,
+              ),
+            ],
+          )
+        : this.icon;
 
+    if (icon != null) {
       children.add(
         Center(
-          child: IconTheme(
-            data: IconThemeData(
-              color: trackColor,
-              shadows: <Shadow>[
-                Shadow(
-                  color: outlineColor,
-                  blurRadius: outlineSize,
-                  offset: const Offset(1, 1),
-                ),
-                Shadow(
-                  color: outlineColor,
-                  blurRadius: outlineSize,
-                  offset: const Offset(-1, -1),
-                ),
-                Shadow(
-                  color: outlineColor,
-                  blurRadius: outlineSize,
-                  offset: const Offset(-1, 1),
-                ),
-                Shadow(
-                  color: outlineColor,
-                  blurRadius: outlineSize,
-                  offset: const Offset(1, -1),
-                )
-              ],
-            ),
-            child: icon,
-          ),
+          child: icon,
         ),
       );
     }
@@ -186,23 +170,19 @@ class IpadBatteryWidget extends StatelessWidget {
   }
 
   Widget _buildBar(BuildContext context, double trackWidth) {
-    final width = (trackWidth - trackPadding * 2.0) * batteryStatus.value;
+    final width = (trackWidth - trackPadding * 2.0) * batteryStatus.value / 100;
     final borderRadius = barBorderRadius ?? BorderRadius.circular(1.5);
-    final currentColor = _getCurrentBarColor(context);
+    final currentColor = batteryStatus.getBatteryColor(
+      Theme.of(context).colorScheme,
+    );
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
       width: width,
       decoration: BoxDecoration(
         borderRadius: borderRadius,
         color: currentColor,
       ),
     );
-  }
-
-  Color _getCurrentBarColor(BuildContext context) {
-    return barColor ??
-        (CupertinoTheme.brightnessOf(context) == Brightness.light
-            ? Colors.black
-            : Colors.white);
   }
 }

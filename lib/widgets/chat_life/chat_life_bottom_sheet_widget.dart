@@ -13,15 +13,13 @@ class ChatLifeBottomSheetWidget extends StatelessWidget {
     return BottomSheet(
       enableDrag: false,
       onClosing: () => Navigator.pop(context),
-      builder: (context) => Card(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
-          child: Center(
-            child: Row(
-              children: [
-                BaseAvatarWidget(icon: user.icon),
-              ],
-            ),
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height / 3,
+        child: Center(
+          child: Row(
+            children: [
+              BaseAvatarWidget(icon: user.icon),
+            ],
           ),
         ),
       ),

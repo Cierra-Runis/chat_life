@@ -10,74 +10,78 @@ class ChatLifeSplitViewLeftDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      width: MediaQuery.of(context).size.width,
-      shape: const BeveledRectangleBorder(),
-      child: Column(
-        children: [
-          BaseListItemWidget(
-            icon: BaseChipWidget(
-              label: '今天也是好天气',
-              leadingIconData: Icons.calendar_month_rounded,
-              onTap: () {}, // TODO:
-            ),
-            accessoryView: const BaseDrawerCloseButtonWidget(),
-            bottomView: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
-              ),
-              child: Row(
-                children: [
-                  BaseAvatarWidget(
-                    icon: user.icon,
-                    size: 50,
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) => Drawer(
+          width: constraints.maxWidth,
+          shape: const BeveledRectangleBorder(),
+          child: Column(
+            children: [
+              BaseListItemWidget(
+                icon: BaseChipWidget(
+                  label: '今天也是好天气',
+                  leadingIconData: Icons.calendar_month_rounded,
+                  onTap: () {}, // TODO:
+                ),
+                accessoryView: const BaseDrawerCloseButtonWidget(),
+                bottomView: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 16.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          user.name,
-                          style: const TextStyle(fontSize: 18),
+                  child: Row(
+                    children: [
+                      BaseAvatarWidget(
+                        icon: user.icon,
+                        size: 50,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              user.name,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            BaseChipWidget(
+                              label: user.motto,
+                              leadingIconData: Icons.edit_rounded,
+                              onTap: () {}, // TODO:
+                            )
+                          ],
                         ),
-                        BaseChipWidget(
-                          label: user.motto,
-                          leadingIconData: Icons.edit_rounded,
-                          onTap: () {}, // TODO:
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                    ],
+                  ),
+                ),
+                onTap: () => BaseSplitViewWidget.of(context).setSecondary(
+                  UserDetailPage(user: user),
+                ),
               ),
-            ),
-            onTap: () => BaseSplitViewWidget.of(context).setSecondary(
-              UserDetailPage(user: user),
-            ),
-          ),
-          Expanded(
-            child: BaseListWidget(
-              children: [
-                BaseListItemWidget(
-                  iconData: Icons.settings_rounded,
-                  titleText: '设置',
-                  onTap: () => BaseSplitViewWidget.of(context).setSecondary(
-                    const SettingPage(),
-                  ),
+              Expanded(
+                child: BaseListWidget(
+                  children: [
+                    BaseListItemWidget(
+                      iconData: Icons.settings_rounded,
+                      titleText: '设置',
+                      onTap: () => BaseSplitViewWidget.of(context).setSecondary(
+                        const SettingPage(),
+                      ),
+                    ),
+                    BaseListItemWidget(
+                      iconData: Icons.info_rounded,
+                      titleText: '关于 ${ChatLife.appName}',
+                      onTap: () => BaseSplitViewWidget.of(context).setSecondary(
+                        const AboutPage(),
+                      ),
+                    ),
+                  ],
                 ),
-                BaseListItemWidget(
-                  iconData: Icons.info_rounded,
-                  titleText: '关于 ${ChatLife.appName}',
-                  onTap: () => BaseSplitViewWidget.of(context).setSecondary(
-                    const AboutPage(),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

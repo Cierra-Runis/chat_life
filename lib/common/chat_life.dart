@@ -13,9 +13,11 @@ class ChatLife {
   static const String database = 'ChatLife_database';
 
   static void run() async {
+    ChatLife.printLog('$appName 启动');
+
     WidgetsFlutterBinding.ensureInitialized();
 
-    await windowsInit();
+    await MultiPlatform.init();
 
     runApp(const RootWidget());
   }
@@ -23,24 +25,6 @@ class ChatLife {
   static void printLog(dynamic newLog) {
     final time = DateTime.now().format(DateFormat.HOUR24_MINUTE_SECOND);
     devtools.log('[$appName $time] $newLog');
-  }
-
-  static Future<void> windowsInit() async {
-    await windowManager.ensureInitialized();
-    WindowOptions windowOptions = const WindowOptions(
-      title: ChatLife.appName,
-      size: Size(1280, 894),
-      minimumSize: Size(894 / 2, 894),
-      center: true,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-    );
-
-    await windowManager.waitUntilReadyToShow(windowOptions, () {
-      windowManager.show();
-      windowManager.focus();
-    });
   }
 
   /// 亮色模式下的颜色集

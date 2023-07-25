@@ -8,4 +8,14 @@ enum UserStatusType {
   String get label => isOnline ? '在线' : '离线';
 }
 
-enum BatteryStatusType { error, low, charging, normal }
+enum BatteryStatusType {
+  error,
+  low,
+  charging,
+  normal;
+
+  bool get isError => this == BatteryStatusType.error;
+  bool get isLow => this == BatteryStatusType.low;
+  bool get isCharing => this == BatteryStatusType.charging;
+  bool get isNormal => this == BatteryStatusType.normal;
+}
