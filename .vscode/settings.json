@@ -15,15 +15,16 @@
     "**/.vscode": true,
     "**/.flutter-plugins": true,
     "**/.flutter-plugins-dependencies": true,
+    "**/splitMap": true,
     "**/android": true,
-    "**/windows": true,
-    "**/splitMap": true
+    "**/windows": true
   },
   "explorerExclude.backup": {},
   "cSpell.words": [
     "Backlink",
     "chatview",
     "Cupertino",
+    "displaymode",
     "fluttericon",
     "fullscreen",
     "hideable",

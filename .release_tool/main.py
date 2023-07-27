@@ -209,8 +209,7 @@ def main_module() -> None:
         os.system(
             'flutter build apk' + ' --obfuscate' +
             ' --split-debug-info=splitMap' +
-            ' --target-platform android-arm64' + ' --split-per-abi' +
-            ' --no-tree-shake-icons', )
+            ' --target-platform android-arm64' + ' --split-per-abi', )
 
         # 并将 build 后的 apk 转移至 .release_tool/
         copy_file(

@@ -2,7 +2,7 @@ name: chat_life
 description: A new Flutter project.
 publish_to: "none"
 
-version: 0.0.2+3
+version: 0.0.3+4
 
 environment:
   sdk: ">=3.0.5 <4.0.0"
@@ -18,6 +18,7 @@ dependencies:
   based_dock_scaffold: ^1.0.1
   cupertino_icons: ^1.0.5
   dart_date: ^1.2.2 # 转换时间工具 [https://pub.dev/packages/dart_date]
+  flutter_displaymode: ^0.6.0 # 高刷 [https://pub.dev/packages/flutter_displaymode]
   flutter_svg: ^2.0.6
   freezed_annotation: ^2.4.1
   loading_animation_widget: ^1.2.0+4 # 加载器组件 [https://pub.dev/packages/loading_animation_widget]

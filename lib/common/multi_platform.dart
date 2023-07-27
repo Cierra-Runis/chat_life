@@ -75,6 +75,8 @@ class AndroidPlatform {
       overlays: [],
     );
 
+    await FlutterDisplayMode.setHighRefreshRate();
+
     ChatLife.printLog('初始化 AndroidPlatform 设置完毕');
   }
 }
