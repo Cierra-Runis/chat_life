@@ -16,12 +16,16 @@ class MultiPlatform {
 
   static Future<void> setFullScreen(bool isFullScreen) async {
     if (Platform.isAndroid) return;
-    if (Platform.isWindows) windowManager.setFullScreen(isFullScreen);
+    if (Platform.isWindows) return windowManager.setFullScreen(isFullScreen);
     throw Exception('UnSupport Platform');
   }
 
   static Future<void> close() async {
-    return SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    if (Platform.isAndroid) {
+      return SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    }
+    if (Platform.isWindows) return windowManager.close();
+    throw Exception('UnSupport Platform');
   }
 }
 

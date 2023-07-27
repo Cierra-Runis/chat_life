@@ -2,7 +2,7 @@ name: chat_life
 description: A new Flutter project.
 publish_to: "none"
 
-version: 1.0.1+2
+version: 0.0.2+3
 
 environment:
   sdk: ">=3.0.5 <4.0.0"
@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
   animated_text_kit: ^4.2.2
   badges: ^3.1.1 # 小红点提示 [https://pub.dev/packages/badges]
+  based_battery_indicator: ^1.0.0
+  based_dock_scaffold: ^1.0.1
   cupertino_icons: ^1.0.5
   dart_date: ^1.2.2 # 转换时间工具 [https://pub.dev/packages/dart_date]
   flutter_svg: ^2.0.6
@@ -24,6 +26,7 @@ dependencies:
   isar_flutter_libs: ^3.1.0+1
   json_annotation: ^4.8.1
   path_provider: ^2.0.15
+  package_info_plus:
   star_menu: ^3.1.4
   url_launcher: ^6.1.12
   unicons: ^2.1.1 # 图标 [https://pub.dev/packages/unicons]

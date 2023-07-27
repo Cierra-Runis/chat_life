@@ -7,5 +7,5 @@ class IpadStatus {
   });
 
   final DateTime dateTime;
-  final BatteryStatus batteryStatus;
+  final BasedBatteryStatus batteryStatus;
 }

@@ -72,9 +72,16 @@ class ChatLifeSplitViewLeftDrawerWidget extends StatelessWidget {
                     BaseListItemWidget(
                       iconData: Icons.info_rounded,
                       titleText: '关于 ${ChatLife.appName}',
-                      onTap: () => BaseSplitViewWidget.of(context).setSecondary(
-                        const AboutPage(),
-                      ),
+                      onTap: () async {
+                        final packageInfo = await PackageInfo.fromPlatform();
+                        if (context.mounted) {
+                          BaseSplitViewWidget.of(context).setSecondary(
+                            AboutPage(
+                              packageInfo: packageInfo,
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),

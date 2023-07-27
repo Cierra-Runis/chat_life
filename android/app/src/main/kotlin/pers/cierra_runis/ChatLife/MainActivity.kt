@@ -1,4 +1,4 @@
-package pers.cierra_runis.chat_life
+package pers.cierra_runis.ChatLife
 
 import io.flutter.embedding.android.FlutterActivity
 

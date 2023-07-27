@@ -16,6 +16,8 @@ export 'widgets/index.dart';
 
 export 'package:animated_text_kit/animated_text_kit.dart';
 export 'package:badges/badges.dart';
+export 'package:based_battery_indicator/based_battery_indicator.dart';
+export 'package:based_dock_scaffold/based_dock_scaffold.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
 export 'package:dart_date/dart_date.dart' hide Interval;
 export 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +26,7 @@ export 'package:loading_animation_widget/loading_animation_widget.dart'; // 加�
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:isar/isar.dart';
 export 'package:path_provider/path_provider.dart';
+export 'package:package_info_plus/package_info_plus.dart';
 export 'package:star_menu/star_menu.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:unicons/unicons.dart'; // 图标

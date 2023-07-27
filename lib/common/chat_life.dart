@@ -6,8 +6,6 @@ class ChatLife {
 
   static const String appName = 'ChatLife';
 
-  static const String appVersion = 'v1.0.0+1';
-
   static const String appGithub = 'https://github.com/Cierra-Runis/chat_life';
 
   static const String database = 'ChatLife_database';

@@ -112,8 +112,8 @@ class IpadStatusBarWidget extends StatelessWidget
                     const Icon(Icons.wifi, size: 12),
                     const Icon(CupertinoIcons.lock_rotation, size: 12),
                     Text('${ipadStatus.batteryStatus.value}%', style: style),
-                    IpadBatteryWidget(
-                      batteryStatus: ipadStatus.batteryStatus,
+                    BasedBatteryIndicator(
+                      status: ipadStatus.batteryStatus,
                     ),
                   ],
                 ),

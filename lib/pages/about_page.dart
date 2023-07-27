@@ -4,7 +4,10 @@ import 'package:url_launcher/url_launcher_string.dart';
 class AboutPage extends StatelessWidget {
   const AboutPage({
     super.key,
+    required this.packageInfo,
   });
+
+  final PackageInfo packageInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class AboutPage extends StatelessWidget {
                     children: [
                       const ChatLifeLogoWidget(),
                       Text(
-                        ChatLife.appVersion,
+                        'v${packageInfo.version}+${packageInfo.buildNumber}',
                         style: TextStyle(color: colorScheme.outline),
                       ),
                     ],
@@ -48,12 +51,17 @@ class AboutPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 32.0),
             child: TextButton(
-              onPressed: () => BaseSplitViewWidget.of(context).push(
-                const LicensePage(
-                  applicationVersion: ChatLife.appVersion,
-                  applicationIcon: ChatLifeLogoWidget(),
-                ),
-              ),
+              onPressed: () {
+                if (context.mounted) {
+                  BaseSplitViewWidget.of(context).push(
+                    LicensePage(
+                      applicationVersion:
+                          'v${packageInfo.version}+${packageInfo.buildNumber}',
+                      applicationIcon: const ChatLifeLogoWidget(),
+                    ),
+                  );
+                }
+              },
               child: const Text('许可'),
             ),
           )

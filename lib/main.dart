@@ -26,9 +26,8 @@ class RootWidget extends StatelessWidget {
           home: IpadWidget(
             ipadStatus: IpadStatus(
               dateTime: snapshot.data ?? DateTime.now(),
-              batteryStatus: const BatteryStatus(
-                value: 75,
-                type: BatteryStatusType.charging,
+              batteryStatus: const BasedBatteryStatus(
+                value: 10,
               ),
             ),
             currentApp: const ChatLifeSplitViewWidget(),
