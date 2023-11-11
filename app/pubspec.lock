@@ -17,14 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.13.0"
-  animated_text_kit:
+  another_flushbar:
     dependency: "direct main"
     description:
-      name: animated_text_kit
-      sha256: "37392a5376c9a1a503b02463c38bc0342ef814ddbb8f9977bc90f2a84b22fa92"
+      name: another_flushbar
+      sha256: "19bf9520230ec40b300aaf9dd2a8fefcb277b25ecd1c4838f530566965befc2a"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.2"
+    version: "1.12.30"
   args:
     dependency: transitive
     description:
@@ -429,14 +429,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  loading_animation_widget:
-    dependency: "direct main"
-    description:
-      name: loading_animation_widget
-      sha256: "1901682600273a966c34cf44a85fc5355da92a8d08a8a43c11adc4e471993e3a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0+4"
   logging:
     dependency: transitive
     description:
@@ -674,14 +666,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
-  star_menu:
-    dependency: "direct main"
-    description:
-      name: star_menu
-      sha256: "8c5de0b5002dd09bee51bc4456c3424ba81e127a2b0a2a6e7b775fdacaed2a61"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.4"
   stream_channel:
     dependency: transitive
     description:
@@ -706,6 +690,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  system_tray:
+    dependency: "direct main"
+    description:
+      name: system_tray
+      sha256: "40444e5de8ed907822a98694fd031b8accc3cb3c0baa547634ce76189cf3d9cf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   term_glyph:
     dependency: transitive
     description:
@@ -754,14 +746,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
-  unicons:
-    dependency: "direct main"
-    description:
-      name: unicons
-      sha256: dbfcf93ff4d4ea19b324113857e358e4882115ab85db04417a4ba1c72b17a670
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   url_launcher:
     dependency: "direct main"
     description:
@@ -826,6 +810,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.7"
   vector_graphics:
     dependency: transitive
     description:

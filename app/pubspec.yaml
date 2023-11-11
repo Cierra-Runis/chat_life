@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  animated_text_kit: ^4.2.2
+  another_flushbar: ^1.12.30
   based_avatar: ^1.0.3
   based_list: ^1.1.2
   based_split_view: ^1.0.0
@@ -20,16 +20,14 @@ dependencies:
   flutter_displaymode: ^0.6.0
   flutter_svg: ^2.0.9
   freezed_annotation: ^2.4.1
-  loading_animation_widget: ^1.2.0+4
   intl: ^0.18.1
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
   json_annotation: ^4.8.1
   path_provider: ^2.1.1
   package_info_plus: ^4.2.0
-  star_menu: ^3.1.4
+  system_tray: ^2.0.3
   url_launcher: ^6.2.1
-  unicons: ^2.1.1
   window_manager: ^0.3.7
 
 dev_dependencies:
@@ -50,6 +48,15 @@ flutter:
   fonts:
     - family: Torus
       fonts:
+        - asset: assets/fonts/Torus-Thin.otf
+          weight: 100
+        - asset: assets/fonts/Torus-Light.otf
+          weight: 300
         - asset: assets/fonts/Torus-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Torus-SemiBold.otf
+          weight: 600
         - asset: assets/fonts/Torus-Bold.otf
           weight: 700
+        - asset: assets/fonts/Torus-Heavy.otf
+          weight: 900

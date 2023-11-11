@@ -22,7 +22,11 @@
   },
   "explorerExclude.backup": {},
   "cSpell.words": [
-    "mocktail"
+    "displaymode",
+    "flushbar",
+    "fullscreen",
+    "mocktail",
+    "unmaximize"
   ],
   "java.configuration.updateBuildConfiguration": "automatic"
 }
