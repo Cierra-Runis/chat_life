@@ -12,7 +12,7 @@ class RootView extends StatefulWidget {
 class _RootViewState extends State<RootView> {
   int _currentIndex = 0;
 
-  void _onItemTapped(int index) {
+  void _onDestinationSelected(int index) {
     setState(() => _currentIndex = index);
   }
 
@@ -23,13 +23,13 @@ class _RootViewState extends State<RootView> {
       background: context.colorScheme.outline.withAlpha(16),
       backgroundRadius: BorderRadius.circular(16),
       condition: _currentIndex == 0,
-      onConditionFail: () => _onItemTapped(0),
+      onConditionFail: () => _onDestinationSelected(0),
       child: BasedSplitView(
         splitMode: SplitMode.width,
         navigatorKey: splitViewKey,
         leftWidget: RootPage(
           currentIndex: _currentIndex,
-          onItemTapped: _onItemTapped,
+          onDestinationSelected: _onDestinationSelected,
         ),
         leftWidth: 364,
         breakPoint: 364 * 2,
@@ -45,15 +45,16 @@ class RootPage extends StatelessWidget {
   const RootPage({
     super.key,
     required this.currentIndex,
-    required this.onItemTapped,
+    required this.onDestinationSelected,
   });
 
   final int currentIndex;
-  final void Function(int) onItemTapped;
+  final void Function(int) onDestinationSelected;
 
   static const List<Widget> _bodyWidgets = [
-    Scaffold(key: ValueKey('HomePage')),
-    Scaffold(key: ValueKey('MorePage')),
+    HomePage(key: ValueKey(HomePage)),
+    ContactsPage(key: ValueKey(ContactsPage)),
+    SpacePage(key: ValueKey(SpacePage)),
   ];
 
   @override
@@ -67,15 +68,19 @@ class RootPage extends StatelessWidget {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
-        onDestinationSelected: onItemTapped,
+        onDestinationSelected: onDestinationSelected,
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.home_rounded),
-            label: '主页',
+            icon: Icon(Icons.message_rounded),
+            label: '消息',
           ),
           NavigationDestination(
-            icon: Icon(Icons.more_rounded),
-            label: '更多',
+            icon: Icon(Icons.people_rounded),
+            label: '联系人',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.public_rounded),
+            label: '空间',
           ),
         ],
       ),
