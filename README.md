@@ -1,5 +1,5 @@
 <div align="center">
-  <img id="chat_life" width="96" alt="chat_life" src="https://raw.githubusercontent.com/Cierra-Runis/chat_life/main/assets/images/icon_fill.svg">
+  <img id="chat_life" width="96" alt="chat_life" src="https://raw.githubusercontent.com/Cierra-Runis/chat_life/main/app/assets/images/icon_fill.svg">
   <p>『 chat_life - 聊会天吧！』</p>
 </div>
 
