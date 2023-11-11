@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations: # Flutter [网址略]
+  flutter_localizations:
     sdk: flutter
   animated_text_kit: ^4.2.2
   based_avatar: ^1.0.3
@@ -35,9 +35,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   build_runner: ^2.4.6
-  freezed: ^2.4.1
+  freezed: ^2.4.5
   isar_generator: ^3.1.0+1
   json_serializable: ^6.7.1
 

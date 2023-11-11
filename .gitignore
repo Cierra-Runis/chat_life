@@ -44,7 +44,5 @@ app.*.map.json
 /android/app/release
 
 *.g.dart
-
-.release_tool/ChatLife for Windows/
-.release_tool/ChatLife for Windows.zip
-.release_tool/app-arm64-v8a-release.apk
+*.freezed.dart
+**/lib/l10n/**/*.dart
