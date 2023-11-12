@@ -4,6 +4,7 @@ import 'dart:developer' as devtools show log;
 abstract class App {
   static const name = 'ChatLife';
   static const fontFamily = 'Torus';
+  static const fontFamilyFallback = 'MiSans';
 
   static void printLog(dynamic log) =>
       devtools.log('$log', name: name, time: DateTime.now());

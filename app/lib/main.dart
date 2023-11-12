@@ -11,26 +11,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const appBarTheme = AppBarTheme(centerTitle: true);
 
+    final theme = ThemeData(
+      fontFamily: App.fontFamily,
+      fontFamilyFallback: const [App.fontFamilyFallback],
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: seedColor,
+      ),
+      appBarTheme: appBarTheme,
+      useMaterial3: true,
+    );
+
+    final darkTheme = ThemeData(
+      fontFamily: App.fontFamily,
+      fontFamilyFallback: const [App.fontFamilyFallback],
+      colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: seedColor,
+      ),
+      appBarTheme: appBarTheme,
+      useMaterial3: true,
+    );
+
     return MaterialApp(
       title: App.name,
       scrollBehavior: const CupertinoScrollBehavior(),
-      theme: ThemeData(
-        fontFamily: App.fontFamily,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: seedColor,
-        ),
-        appBarTheme: appBarTheme,
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        fontFamily: App.fontFamily,
-        colorScheme: ColorScheme.fromSeed(
-          brightness: Brightness.dark,
-          seedColor: seedColor,
-        ),
-        appBarTheme: appBarTheme,
-        useMaterial3: true,
-      ),
+      theme: theme,
+      darkTheme: darkTheme,
       home: BasedSplashPage(
         rootPage: Column(
           children: [
