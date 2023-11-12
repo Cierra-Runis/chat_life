@@ -13,3 +13,8 @@ extension BuildContextExt on BuildContext {
 extension SliverExt on Widget {
   Widget get adaptSliver => SliverToBoxAdapter(child: this);
 }
+
+extension BrightnessExt on Brightness {
+  bool get isDark => this == Brightness.dark;
+  bool get isLight => this == Brightness.light;
+}

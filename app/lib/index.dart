@@ -6,7 +6,9 @@ export 'pages/index.dart';
 export 'widgets/index.dart';
 
 export 'dart:async';
+export 'dart:convert';
 export 'dart:io';
+export 'dart:math';
 
 export 'package:flutter/material.dart';
 export 'package:flutter/cupertino.dart' hide RefreshCallback;
@@ -21,6 +23,7 @@ export 'package:dynamic_color/dynamic_color.dart';
 export 'package:flutter_displaymode/flutter_displaymode.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
+export 'package:image_picker/image_picker.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:path_provider/path_provider.dart';
 export 'package:package_info_plus/package_info_plus.dart';

@@ -1,4 +1,5 @@
 import 'package:chat_life/index.dart';
+import 'package:chat_life/pages/chat_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -37,6 +38,13 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: const HomeDrawer(),
+      body: BasedListView(
+        children: [
+          BasedListTile(
+            onTap: () => context.push(const ChatPage()),
+          ),
+        ],
+      ),
     );
   }
 }
