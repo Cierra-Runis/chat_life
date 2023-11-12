@@ -2,54 +2,19 @@ import 'package:chat_life/index.dart';
 
 final splitViewKey = GlobalKey<NavigatorState>();
 
-class RootView extends StatefulWidget {
-  const RootView({super.key});
+class RootPage extends StatefulWidget {
+  const RootPage({super.key});
 
   @override
-  State<RootView> createState() => _RootViewState();
+  State<RootPage> createState() => _RootPageState();
 }
 
-class _RootViewState extends State<RootView> {
+class _RootPageState extends State<RootPage> {
   int _currentIndex = 0;
 
   void _onDestinationSelected(int index) {
     setState(() => _currentIndex = index);
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return DoubleBack(
-      message: '再次返回以退出',
-      background: context.colorScheme.outline.withAlpha(16),
-      backgroundRadius: BorderRadius.circular(16),
-      condition: _currentIndex == 0,
-      onConditionFail: () => _onDestinationSelected(0),
-      child: BasedSplitView(
-        splitMode: SplitMode.width,
-        navigatorKey: splitViewKey,
-        leftWidget: RootPage(
-          currentIndex: _currentIndex,
-          onDestinationSelected: _onDestinationSelected,
-        ),
-        leftWidth: 364,
-        breakPoint: 364 * 2,
-        rightPlaceholder: const Scaffold(
-          body: Center(),
-        ),
-      ),
-    );
-  }
-}
-
-class RootPage extends StatelessWidget {
-  const RootPage({
-    super.key,
-    required this.currentIndex,
-    required this.onDestinationSelected,
-  });
-
-  final int currentIndex;
-  final void Function(int) onDestinationSelected;
 
   static const List<Widget> _bodyWidgets = [
     HomePage(key: ValueKey(HomePage)),
@@ -59,30 +24,57 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _bodyWidgets[currentIndex],
+    return BasedSplitView(
+      splitMode: SplitMode.width,
+      navigatorKey: splitViewKey,
+      leftWidth: 364,
+      breakPoint: 364 * 2,
+      leftWidget: Scaffold(
+        body: Center(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: _bodyWidgets[_currentIndex],
+          ),
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: _onDestinationSelected,
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.message_rounded),
+              label: '消息',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.people_rounded),
+              label: '联系人',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.public_rounded),
+              label: '空间',
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
-        onDestinationSelected: onDestinationSelected,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.message_rounded),
-            label: '消息',
+      rightPlaceholder: const RightPlaceholder(),
+    );
+  }
+}
+
+class RightPlaceholder extends StatelessWidget {
+  const RightPlaceholder({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Image(
+          image: AssetImage(
+            'assets/images/app_icon.ico',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.people_rounded),
-            label: '联系人',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.public_rounded),
-            label: '空间',
-          ),
-        ],
+          width: 128,
+        ),
       ),
     );
   }

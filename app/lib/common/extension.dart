@@ -1,6 +1,6 @@
 import 'package:chat_life/index.dart';
 
-extension BuildContextExtension on BuildContext {
+extension BuildContextExt on BuildContext {
   Future<T?> push<T extends Object?>(Widget page) => splitViewKey.currentState!
       .push(CupertinoPageRoute<T>(builder: (_) => page));
 
@@ -8,4 +8,8 @@ extension BuildContextExtension on BuildContext {
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
   Brightness get brightness => colorScheme.brightness;
+}
+
+extension SliverExt on Widget {
+  Widget get adaptSliver => SliverToBoxAdapter(child: this);
 }

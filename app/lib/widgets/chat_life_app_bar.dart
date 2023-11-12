@@ -1,6 +1,6 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ChatLifeAppBar extends StatelessWidget {
   const ChatLifeAppBar({super.key});
 
   static const _appBarHeight = 28.0;
@@ -8,15 +8,12 @@ class ChatLifeAppBar extends StatelessWidget implements PreferredSizeWidget {
   static const _actionWidth = _actionSize * 2;
 
   @override
-  Size get preferredSize => const Size.fromHeight(_appBarHeight);
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: toggleMaximized,
       onPanStart: (details) => windowManager.startDragging(),
       child: AppBar(
-        toolbarHeight: preferredSize.height,
+        toolbarHeight: _appBarHeight,
         actions: [
           MaterialButton(
             onPressed: windowManager.minimize,

@@ -22,6 +22,8 @@ abstract class App {
       await FlutterDisplayMode.setHighRefreshRate();
     }
 
+    seedColor = await DynamicColorPlugin.getAccentColor() ?? Colors.deepPurple;
+
     runApp(const MyApp());
   }
 }

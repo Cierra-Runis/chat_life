@@ -7,6 +7,47 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        leading: const _HomeAvatar(),
+        centerTitle: false,
+        title: const Wrap(
+          direction: Axis.vertical,
+          children: [
+            Text('用户名'),
+            Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              runAlignment: WrapAlignment.center,
+              spacing: 4,
+              children: [
+                Badge(
+                  backgroundColor: Colors.green,
+                ),
+                Text(
+                  '在线',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        ],
+      ),
+      drawer: const HomeDrawer(),
+    );
+  }
+}
+
+class _HomeAvatar extends StatelessWidget {
+  const _HomeAvatar();
+
+  @override
+  Widget build(BuildContext context) {
+    return BasedAvatar(
+      onTap: Scaffold.of(context).openDrawer,
+    );
   }
 }
