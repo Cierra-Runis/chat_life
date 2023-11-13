@@ -40,8 +40,83 @@ class HomePage extends StatelessWidget {
       drawer: const HomeDrawer(),
       body: BasedListView(
         children: [
-          BasedListTile(
-            onTap: () => context.push(const ChatPage()),
+          BasedListSection(
+            children: [
+              BasedListTile(
+                leading: const BasedAvatar(
+                  image: NetworkImage(App.authorGitHubAvatar),
+                ),
+                titleText: App.name,
+                subtitleText: 'text',
+                subtitleTextStyle: TextStyle(
+                  color: context.colorScheme.outline,
+                  fontSize: 12,
+                ),
+                trailing: const Badge(
+                  smallSize: 12,
+                  largeSize: 12,
+                  label: Text(
+                    '9999',
+                    style: TextStyle(fontSize: 8),
+                  ),
+                  child: Text(
+                    '22:21',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                onTap: () => context.push(const ChatPage()),
+              ),
+              BasedListTile(
+                leading: const BasedAvatar(
+                  image: NetworkImage(App.authorGitHubAvatar),
+                ),
+                titleText: App.name,
+                subtitleText: 'text',
+                subtitleTextStyle: TextStyle(
+                  color: context.colorScheme.outline,
+                  fontSize: 12,
+                ),
+                trailing: const Badge(
+                  smallSize: 12,
+                  largeSize: 12,
+                  label: Text(
+                    '9999',
+                    style: TextStyle(fontSize: 8),
+                  ),
+                  child: Text(
+                    '22:21',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                onTap: () => context.push(const ChatPage()),
+              ),
+              BasedListTile(
+                leading: const BasedAvatar(
+                  image: NetworkImage(App.authorGitHubAvatar),
+                ),
+                titleText: App.name,
+                subtitleText: 'text',
+                subtitleTextStyle: TextStyle(
+                  color: context.colorScheme.outline,
+                  fontSize: 12,
+                ),
+                trailing: const Badge(
+                  smallSize: 12,
+                  largeSize: 12,
+                  label: Text(
+                    '9999',
+                    style: TextStyle(
+                      fontSize: 8,
+                    ),
+                  ),
+                  child: Text(
+                    '22:21',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                onTap: () => context.push(const ChatPage()),
+              ),
+            ],
           ),
         ],
       ),
