@@ -10,6 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const appBarTheme = AppBarTheme(
+      elevation: 0,
+      scrolledUnderElevation: 0,
       centerTitle: true,
     );
 
