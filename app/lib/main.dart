@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appBarTheme = AppBarTheme(centerTitle: true);
+    const appBarTheme = AppBarTheme(
+      centerTitle: true,
+    );
 
     final theme = ThemeData(
       fontFamily: App.fontFamily,
@@ -47,6 +49,15 @@ class MyApp extends StatelessWidget {
         appIcon: const Placeholder(),
         appName: const Text(App.name),
       ),
+      supportedLocales: const [
+        Locale('zh', 'CN'),
+        Locale('en', 'US'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
     );
   }
 }
