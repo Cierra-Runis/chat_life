@@ -6,6 +6,9 @@ abstract class App {
   static const fontFamily = 'Torus';
   static const fontFamilyFallback = 'MiSans';
 
+  static const authorGitHubAvatar =
+      'https://avatars.githubusercontent.com/u/29329988';
+
   static void printLog(dynamic log) =>
       devtools.log('$log', name: name, time: DateTime.now());
 
@@ -65,14 +68,18 @@ class PlatformWindowsTray {
       iconPath: 'assets/images/app_icon.ico',
     );
 
+    /// TODO: Add menu
+
     systemTray.registerSystemTrayEventHandler((eventName) async {
-      App.printLog('托盘点击事件为 $eventName');
-      if (eventName == kSystemTrayEventClick) {
-        if (await windowManager.isVisible()) {
-          windowManager.hide();
-        } else {
-          windowManager.show();
-        }
+      switch (eventName) {
+        case kSystemTrayEventClick:
+          {
+            windowManager.show();
+          }
+        case kSystemTrayEventRightClick:
+          {
+            systemTray.popUpContextMenu();
+          }
       }
     });
   }
