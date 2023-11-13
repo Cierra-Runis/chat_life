@@ -3,7 +3,7 @@ import 'package:chat_life/index.dart';
 class ChatLifeAppBar extends StatelessWidget {
   const ChatLifeAppBar({super.key});
 
-  static const _appBarHeight = 28.0;
+  static const _appBarHeight = 24.0;
   static const _actionSize = 16.0;
   static const _actionWidth = _actionSize * 2;
 
@@ -13,31 +13,50 @@ class ChatLifeAppBar extends StatelessWidget {
       onDoubleTap: toggleMaximized,
       onPanStart: (details) => windowManager.startDragging(),
       child: AppBar(
+        elevation: 3,
         toolbarHeight: _appBarHeight,
+        title: const Text(
+          App.name,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
-          MaterialButton(
-            onPressed: windowManager.minimize,
-            minWidth: _actionWidth,
-            child: const Icon(
-              Icons.remove_rounded,
-              size: _actionSize,
+          InkWell(
+            onTap: windowManager.minimize,
+            child: const SizedBox(
+              width: _actionWidth,
+              height: _appBarHeight,
+              child: Icon(
+                Icons.remove_rounded,
+                size: _actionSize,
+              ),
             ),
           ),
-          MaterialButton(
-            onPressed: toggleMaximized,
-            minWidth: _actionWidth,
-            child: const Icon(
-              Icons.fullscreen_rounded,
-              size: _actionSize,
+          InkWell(
+            /// TODO: based_snap_assist
+            onHover: (value) => App.printLog('based_snap_assist'),
+            onTap: toggleMaximized,
+            child: const SizedBox(
+              width: _actionWidth,
+              height: _appBarHeight,
+              child: Icon(
+                Icons.fullscreen_rounded,
+                size: _actionSize,
+              ),
             ),
           ),
-          MaterialButton(
-            onPressed: windowManager.hide,
+          InkWell(
+            onTap: windowManager.hide,
             hoverColor: Colors.red,
-            minWidth: _actionWidth,
-            child: const Icon(
-              Icons.close_rounded,
-              size: _actionSize,
+            child: const SizedBox(
+              width: _actionWidth,
+              height: _appBarHeight,
+              child: Icon(
+                Icons.close_rounded,
+                size: _actionSize,
+              ),
             ),
           ),
         ],
