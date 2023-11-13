@@ -9,19 +9,36 @@ String randomString() {
   return base64UrlEncode(values);
 }
 
-class ChatPage extends StatefulWidget {
+class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  Widget build(BuildContext context) {
+    return ScaffoldMessenger(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: const [EndDrawerButton()],
+        ),
+        endDrawer: const Drawer(),
+        body: const _ChatPage(),
+      ),
+    );
+  }
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPage extends StatefulWidget {
+  const _ChatPage();
+
+  @override
+  State<_ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
   final List<types.Message> _messages = [
     types.TextMessage(
       author: const types.User(
         id: '111111',
-        imageUrl: 'https://avatars.githubusercontent.com/u/29329988',
+        imageUrl: App.authorGitHubAvatar,
       ),
       id: randomString(),
       text: 'text',
@@ -29,13 +46,37 @@ class _ChatPageState extends State<ChatPage> {
   ];
   final _user = const types.User(
     id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-    imageUrl: 'https://avatars.githubusercontent.com/u/29329988',
+    imageUrl: App.authorGitHubAvatar,
   );
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
+
+    const bodyTextStyle = TextStyle(
+      fontSize: 14,
+      height: 1.5,
+    );
+
+    final linkDescriptionTextStyle = TextStyle(
+      fontSize: 12,
+      color: colorScheme.onBackground,
+    );
+    final linkTitleTextStyle = TextStyle(
+      fontSize: 16,
+      color: colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
+    final bodyLinkTextStyle = TextStyle(
+      color: colorScheme.primary,
+      decorationColor: colorScheme.primary,
+      decoration: TextDecoration.underline,
+    );
+
+    const userTextStyle = TextStyle(fontSize: 12, height: 4 / 3);
+
     final theme = DefaultChatTheme(
+      /// colors
       errorColor: colorScheme.error,
       highlightMessageColor: colorScheme.background,
       primaryColor: context.brightness.isDark
@@ -45,9 +86,13 @@ class _ChatPageState extends State<ChatPage> {
           ? const Color(0x2E000000)
           : const Color(0xFFF2F2F2),
       backgroundColor: colorScheme.background,
+
+      /// input layout
+      inputElevation: 3,
       inputSurfaceTintColor: colorScheme.surfaceTint,
       inputBackgroundColor: colorScheme.background,
       inputTextColor: colorScheme.onBackground,
+      inputTextStyle: bodyTextStyle,
       inputBorderRadius: BorderRadius.zero,
       inputContainerDecoration: BoxDecoration(
         border: Border(
@@ -57,66 +102,59 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ),
       ),
+
+      /// message layout
       messageBorderRadius: 12,
       messageInsetsHorizontal: 12,
       messageInsetsVertical: 6,
-      userNameTextStyle: const TextStyle(fontSize: 12, height: 4 / 3),
-      sentMessageBodyTextStyle: const TextStyle(fontSize: 14, height: 1.5),
-      receivedMessageBodyTextStyle: const TextStyle(fontSize: 14, height: 1.5),
+
+      /// user textStyle
+      userNameTextStyle: userTextStyle,
+      userAvatarTextStyle: userTextStyle,
+
+      /// sent message textStyle
+      sentMessageBodyTextStyle: bodyTextStyle,
+      sentMessageBodyLinkTextStyle: bodyLinkTextStyle,
+      sentMessageLinkTitleTextStyle: linkTitleTextStyle,
+      sentMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
+
+      /// received message textStyle
+      receivedMessageBodyTextStyle: bodyTextStyle,
+      receivedMessageBodyLinkTextStyle: bodyLinkTextStyle,
+      receivedMessageLinkTitleTextStyle: linkTitleTextStyle,
+      receivedMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
     );
 
-    return Scaffold(
-      body: Chat(
-        showUserAvatars: true,
-        showUserNames: true,
-        avatarBuilder: (author) => BasedAvatar(
-          image: NetworkImage(
-            author.imageUrl ?? '',
-          ),
+    return Chat(
+      /// TODO: find a better way to implement l10n
+      l10n: const ChatL10nZhCN(),
+      showUserAvatars: true,
+      showUserNames: true,
+      avatarBuilder: (author) => BasedAvatar(
+        image: NetworkImage(
+          author.imageUrl ?? '',
         ),
-        nameBuilder: (p0) => Text(
-          '${p0.firstName}',
-          style: theme.userNameTextStyle,
-        ),
-        emptyState: const Center(
-          child: Text('要说些什么呢～？'),
-        ),
-        theme: theme,
-        messages: _messages,
-        disableImageGallery: true,
-        onSendPressed: _handleSendPressed,
-        onMessageTap: _handleMessageTap,
-        onAttachmentPressed: _handleAttachmentPressed,
-        onPreviewDataFetched: _handlePreviewDataFetched,
-        user: _user,
       ),
+      nameBuilder: (p0) => Text(
+        '${p0.firstName}',
+        style: theme.userNameTextStyle,
+      ),
+      emptyState: const Center(
+        child: Text('要说些什么呢～？'),
+      ),
+      theme: theme,
+      messages: _messages,
+      disableImageGallery: true,
+      onSendPressed: _handleSendPressed,
+      onAttachmentPressed: _handleAttachmentPressed,
+      onPreviewDataFetched: _handlePreviewDataFetched,
+      user: _user,
+      onMessageTap: _handleMessageTap,
     );
   }
 
   void _addMessage(types.Message message) {
     setState(() => _messages.insert(0, message));
-  }
-
-  void _handleMessageTap(BuildContext _, types.Message message) async {
-    if (message is types.FileMessage) {
-      await OpenFilex.open(message.uri);
-    }
-    if (message is types.ImageMessage) {
-      if (mounted) {
-        await context.push(
-          Scaffold(
-            appBar: AppBar(
-              title: const Text('图片预览'),
-            ),
-            body: Center(
-              child: Placeholder(
-                child: Text(message.uri),
-              ),
-            ),
-          ),
-        );
-      }
-    }
   }
 
   void _handleSendPressed(types.PartialText message) {
@@ -131,44 +169,31 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _handleAttachmentPressed() {
-    showModalBottomSheet<void>(
+    showDialog<void>(
       context: context,
-      builder: (BuildContext context) => SafeArea(
-        child: SizedBox(
-          height: 144,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _handleImageSelection();
-                },
-                child: const Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text('Photo'),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _handleFileSelection();
-                },
-                child: const Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text('File'),
-                ),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text('Cancel'),
-                ),
-              ),
-            ],
+      useRootNavigator: false,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('选择附件种类'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('取消'),
           ),
-        ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _handleImageSelection();
+            },
+            child: const Text('图片'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _handleFileSelection();
+            },
+            child: const Text('文件'),
+          ),
+        ],
       ),
     );
   }
@@ -206,12 +231,12 @@ class _ChatPageState extends State<ChatPage> {
       final message = types.ImageMessage(
         author: _user,
         createdAt: DateTime.now().millisecondsSinceEpoch,
+        width: image.width.toDouble(),
         height: image.height.toDouble(),
         id: randomString(),
         name: result.name,
         size: bytes.length,
         uri: result.path,
-        width: image.width.toDouble(),
       );
 
       _addMessage(message);
@@ -230,5 +255,34 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {
       _messages[index] = updatedMessage;
     });
+  }
+}
+
+mixin _ChatMessageHandles on State<_ChatPage> {
+  void _handleMessageTap(BuildContext _, types.Message message) async {
+    if (message is types.FileMessage) {
+      final result = await OpenFilex.open(message.uri);
+      if (result.type != ResultType.done && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('暂不支持打开该文件'),
+          ),
+        );
+      }
+    }
+    if (message is types.ImageMessage && mounted) {
+      await context.push(
+        Scaffold(
+          appBar: AppBar(
+            title: const Text('图片预览'),
+          ),
+          body: Center(
+            child: Placeholder(
+              child: Text(message.uri),
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
