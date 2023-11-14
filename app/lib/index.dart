@@ -30,6 +30,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:intl/intl.dart' hide TextDirection;
+export 'package:material_color_utilities/material_color_utilities.dart';
 export 'package:open_filex/open_filex.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:package_info_plus/package_info_plus.dart';

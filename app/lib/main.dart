@@ -2,7 +2,8 @@ import 'package:chat_life/index.dart';
 
 void main() => App.run();
 
-late Color seedColor;
+late ColorScheme colorScheme;
+late ColorScheme darkColorScheme;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,9 +19,7 @@ class MyApp extends StatelessWidget {
     final theme = ThemeData(
       fontFamily: App.fontTorus,
       fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: seedColor,
-      ),
+      colorScheme: colorScheme,
       appBarTheme: appBarTheme,
       useMaterial3: true,
     );
@@ -28,10 +27,7 @@ class MyApp extends StatelessWidget {
     final darkTheme = ThemeData(
       fontFamily: App.fontTorus,
       fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
-      colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.dark,
-        seedColor: seedColor,
-      ),
+      colorScheme: darkColorScheme,
       appBarTheme: appBarTheme,
       useMaterial3: true,
     );

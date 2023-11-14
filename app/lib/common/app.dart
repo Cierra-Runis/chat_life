@@ -27,7 +27,21 @@ abstract class App {
       await FlutterDisplayMode.setHighRefreshRate();
     }
 
-    seedColor = await DynamicColorPlugin.getAccentColor() ?? Colors.deepPurple;
+    final palette = await DynamicColorPlugin.getCorePalette();
+    final seedColor =
+        await DynamicColorPlugin.getAccentColor() ?? Colors.deepPurple;
+
+    colorScheme = palette?.toColorScheme(brightness: Brightness.light) ??
+        ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.light,
+        );
+
+    darkColorScheme = palette?.toColorScheme(brightness: Brightness.dark) ??
+        ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.dark,
+        );
 
     runApp(const MyApp());
   }
