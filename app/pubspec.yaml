@@ -13,9 +13,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   another_flushbar: ^1.12.30
-  based_avatar: ^1.0.3
-  based_list: ^1.1.2
-  based_split_view: ^1.0.0
+  based_avatar: ^1.0.4
+  based_list: ^1.1.3
+  based_split_view: ^1.0.2
   dart_date: ^1.3.2
   dynamic_color: ^1.6.8
   file_picker: ^6.1.1

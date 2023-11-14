@@ -2,11 +2,6 @@ import 'package:chat_life/index.dart';
 
 final splitViewKey = GlobalKey<NavigatorState>();
 
-/// TIPS: To keep leftWidget state
-///
-/// TODO: It should auto keep in the future version of [BasedSplitView]
-final _leftWidgetKey = GlobalKey();
-
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
 
@@ -35,7 +30,6 @@ class _RootPageState extends State<RootPage> {
       leftWidth: 364,
       breakPoint: 364 * 2,
       leftWidget: Scaffold(
-        key: _leftWidgetKey,
         body: Center(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
