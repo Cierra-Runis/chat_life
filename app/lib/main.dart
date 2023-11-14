@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
     );
 
     final theme = ThemeData(
-      fontFamily: App.fontFamily,
-      fontFamilyFallback: const [App.fontFamilyFallback],
+      fontFamily: App.fontTorus,
+      fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
       colorScheme: ColorScheme.fromSeed(
         seedColor: seedColor,
       ),
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
     );
 
     final darkTheme = ThemeData(
-      fontFamily: App.fontFamily,
-      fontFamilyFallback: const [App.fontFamilyFallback],
+      fontFamily: App.fontTorus,
+      fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
         seedColor: seedColor,

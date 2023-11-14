@@ -3,8 +3,9 @@ import 'dart:developer' as devtools show log;
 
 abstract class App {
   static const name = 'ChatLife';
-  static const fontFamily = 'Torus';
-  static const fontFamilyFallback = 'MiSans';
+  static const fontTorus = 'Torus';
+  static const fontCascadiaCodePL = 'CascadiaCodePL';
+  static const fontMiSans = 'MiSans';
 
   static const authorGitHubAvatar =
       'https://avatars.githubusercontent.com/u/29329988';
