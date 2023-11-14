@@ -3,7 +3,7 @@ import 'package:chat_life/index.dart';
 class ChatLifeAppBar extends StatelessWidget {
   const ChatLifeAppBar({super.key});
 
-  static const _appBarHeight = 24.0;
+  static const appBarHeight = 24.0;
   static const _actionSize = 16.0;
   static const _actionWidth = _actionSize * 2;
 
@@ -14,7 +14,7 @@ class ChatLifeAppBar extends StatelessWidget {
       onPanStart: (details) => windowManager.startDragging(),
       child: AppBar(
         elevation: 3,
-        toolbarHeight: _appBarHeight,
+        toolbarHeight: appBarHeight,
         title: const Text(
           App.name,
           style: TextStyle(
@@ -27,7 +27,7 @@ class ChatLifeAppBar extends StatelessWidget {
             onTap: windowManager.minimize,
             child: const SizedBox(
               width: _actionWidth,
-              height: _appBarHeight,
+              height: appBarHeight,
               child: Icon(
                 Icons.remove_rounded,
                 size: _actionSize,
@@ -40,7 +40,7 @@ class ChatLifeAppBar extends StatelessWidget {
             onTap: toggleMaximized,
             child: const SizedBox(
               width: _actionWidth,
-              height: _appBarHeight,
+              height: appBarHeight,
               child: Icon(
                 Icons.fullscreen_rounded,
                 size: _actionSize,
@@ -52,7 +52,7 @@ class ChatLifeAppBar extends StatelessWidget {
             hoverColor: Colors.red,
             child: const SizedBox(
               width: _actionWidth,
-              height: _appBarHeight,
+              height: appBarHeight,
               child: Icon(
                 Icons.close_rounded,
                 size: _actionSize,

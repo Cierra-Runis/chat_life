@@ -51,7 +51,7 @@ class _RootPageState extends State<RootPage> {
               label: '消息',
             ),
             NavigationDestination(
-              icon: Icon(Icons.people_rounded),
+              icon: Icon(Icons.group_rounded),
               label: '联系人',
             ),
             NavigationDestination(

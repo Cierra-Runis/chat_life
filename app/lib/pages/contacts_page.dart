@@ -7,6 +7,16 @@ class ContactsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('联系人'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person_add_alt_1_rounded),
+          ),
+        ],
+      ),
+    );
   }
 }
