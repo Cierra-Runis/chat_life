@@ -9,6 +9,7 @@ export 'dart:async';
 export 'dart:convert';
 export 'dart:io';
 export 'dart:math';
+export 'dart:ui' show FontFeature;
 
 export 'package:flutter/material.dart';
 export 'package:flutter/cupertino.dart' hide RefreshCallback;
@@ -24,6 +25,7 @@ export 'package:file_picker/file_picker.dart';
 export 'package:flutter_displaymode/flutter_displaymode.dart';
 export 'package:flutter_link_previewer/flutter_link_previewer.dart' hide Size;
 export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:flutter_quill/flutter_quill.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:image_picker/image_picker.dart';
