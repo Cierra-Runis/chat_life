@@ -1,6 +1,6 @@
 import 'package:chat_life/index.dart';
 
-class ChatLifeAppBar extends StatelessWidget {
+class ChatLifeAppBar extends ConsumerWidget {
   const ChatLifeAppBar({super.key});
 
   static const appBarHeight = 24.0;
@@ -8,7 +8,10 @@ class ChatLifeAppBar extends StatelessWidget {
   static const _actionWidth = _actionSize * 2;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsProvider);
+    final setSettings = ref.watch(settingsProvider.notifier);
+
     return GestureDetector(
       onDoubleTap: toggleMaximized,
       onPanStart: (details) => windowManager.startDragging(),
@@ -23,6 +26,21 @@ class ChatLifeAppBar extends StatelessWidget {
           ),
         ),
         actions: [
+          InkWell(
+            onTap: setSettings.loopThemeMode,
+            child: SizedBox(
+              width: _actionWidth,
+              height: appBarHeight,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: Icon(
+                  key: ValueKey(settings.themeMode),
+                  Settings.themeModeIcon[settings.themeMode],
+                  size: _actionSize,
+                ),
+              ),
+            ),
+          ),
           InkWell(
             onTap: windowManager.minimize,
             child: const SizedBox(
