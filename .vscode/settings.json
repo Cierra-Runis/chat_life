@@ -16,9 +16,11 @@
     "**/build": true,
     "**/.idea": true,
     "**/.dart_tool": true,
+    "**/.dart_frog": true,
     "**/splitMap": true,
     "**/lib/l10n/intl": true,
-    "**/lib/l10n/**/*.dart": true
+    "**/lib/l10n/**/*.dart": true,
+    "**/pubspec.lock": true
   },
   "explorerExclude.backup": {},
   "cSpell.words": [
@@ -28,7 +30,7 @@
     "fullscreen",
     "horiz",
     "mocktail",
+    "riverpod",
     "unmaximize"
   ],
-  "java.configuration.updateBuildConfiguration": "automatic"
 }
