@@ -1,16 +1,13 @@
 import 'package:chat_life/index.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-// For the testing purposes, you should probably use https://pub.dev/packages/uuid.
-String randomString() {
-  final random = Random.secure();
-  final values = List<int>.generate(16, (i) => random.nextInt(255));
-  return base64UrlEncode(values);
-}
-
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({
+    super.key,
+    required this.id,
+  });
+
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,10 @@ class _ChatPage extends StatefulWidget {
   State<_ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
+class _ChatPageState extends State<_ChatPage>
+    with _ChatMessageHandles, _ChatTheme {
+  late WebSocketChannel channel;
+
   final List<types.Message> _messages = [
     types.TextMessage(
       author: const types.User(
@@ -42,6 +42,7 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
       ),
       id: randomString(),
       text: 'text',
+      createdAt: 0,
     ),
   ];
   final _user = const types.User(
@@ -50,80 +51,24 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
   );
 
   @override
+  void initState() {
+    super.initState();
+    //创建websocket连接
+    channel = WebSocketChannel.connect(Uri.parse('ws://localhost:8080/ws'));
+    channel.stream.listen((event) {
+      _addMessage(types.Message.fromJson(jsonDecode(event)));
+    });
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final colorScheme = context.colorScheme;
-
-    const bodyTextStyle = TextStyle(
-      fontSize: 14,
-      height: 1.5,
-    );
-
-    final linkDescriptionTextStyle = TextStyle(
-      fontSize: 12,
-      color: colorScheme.onBackground,
-    );
-    final linkTitleTextStyle = TextStyle(
-      fontSize: 16,
-      color: colorScheme.primary,
-      fontWeight: FontWeight.bold,
-    );
-    final bodyLinkTextStyle = TextStyle(
-      color: colorScheme.primary,
-      decorationColor: colorScheme.primary,
-      decoration: TextDecoration.underline,
-    );
-
-    const userTextStyle = TextStyle(fontSize: 12, height: 4 / 3);
-
-    final theme = DefaultChatTheme(
-      /// colors
-      errorColor: colorScheme.error,
-      highlightMessageColor: colorScheme.background,
-      primaryColor: context.brightness.isDark
-          ? const Color(0x2E000000)
-          : const Color(0xFFF2F2F2),
-      secondaryColor: context.brightness.isDark
-          ? const Color(0x2E000000)
-          : const Color(0xFFF2F2F2),
-      backgroundColor: colorScheme.background,
-
-      /// input layout
-      inputElevation: 3,
-      inputSurfaceTintColor: colorScheme.surfaceTint,
-      inputBackgroundColor: colorScheme.background,
-      inputTextColor: colorScheme.onBackground,
-      inputTextStyle: bodyTextStyle,
-      inputBorderRadius: BorderRadius.zero,
-      inputContainerDecoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: colorScheme.outlineVariant,
-            width: 0.5,
-          ),
-        ),
-      ),
-
-      /// message layout
-      messageBorderRadius: 12,
-      messageInsetsHorizontal: 12,
-      messageInsetsVertical: 6,
-
-      /// user textStyle
-      userNameTextStyle: userTextStyle,
-      userAvatarTextStyle: userTextStyle,
-
-      /// sent message textStyle
-      sentMessageBodyTextStyle: bodyTextStyle,
-      sentMessageBodyLinkTextStyle: bodyLinkTextStyle,
-      sentMessageLinkTitleTextStyle: linkTitleTextStyle,
-      sentMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
-
-      /// received message textStyle
-      receivedMessageBodyTextStyle: bodyTextStyle,
-      receivedMessageBodyLinkTextStyle: bodyLinkTextStyle,
-      receivedMessageLinkTitleTextStyle: linkTitleTextStyle,
-      receivedMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
-    );
+    final theme = getChatTheme(context);
 
     return Chat(
       /// TODO: find a better way to implement l10n
@@ -131,9 +76,11 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
       showUserAvatars: true,
       showUserNames: true,
       avatarBuilder: (author) => BasedAvatar(
-        image: NetworkImage(
-          author.imageUrl ?? '',
-        ),
+        image: author.imageUrl != null
+            ? NetworkImage(
+                author.imageUrl!,
+              )
+            : null,
       ),
       nameBuilder: (p0) => Text(
         '${p0.firstName}',
@@ -154,7 +101,9 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
   }
 
   void _addMessage(types.Message message) {
-    setState(() => _messages.insert(0, message));
+    setState(() {
+      _messages.insert(0, message);
+    });
   }
 
   void _handleSendPressed(types.PartialText message) {
@@ -162,10 +111,11 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: randomString(),
-      text: message.text,
+      text: message.text.replaceAll('\r\n', '\n'),
     );
 
     _addMessage(textMessage);
+    channel.sink.add(jsonEncode(textMessage.toJson()));
   }
 
   void _handleAttachmentPressed() {
@@ -240,6 +190,7 @@ class _ChatPageState extends State<_ChatPage> with _ChatMessageHandles {
       );
 
       _addMessage(message);
+      channel.sink.add(jsonEncode(message.toJson()));
     }
   }
 
@@ -284,5 +235,83 @@ mixin _ChatMessageHandles on State<_ChatPage> {
         ),
       );
     }
+  }
+}
+
+mixin _ChatTheme on Object {
+  DefaultChatTheme getChatTheme(BuildContext context) {
+    final colorScheme = context.colorScheme;
+
+    const bodyTextStyle = TextStyle(
+      fontSize: 14,
+      height: 1.5,
+    );
+
+    final linkDescriptionTextStyle = TextStyle(
+      fontSize: 12,
+      color: colorScheme.onBackground,
+    );
+    final linkTitleTextStyle = TextStyle(
+      fontSize: 16,
+      color: colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
+    final bodyLinkTextStyle = TextStyle(
+      color: colorScheme.primary,
+      decorationColor: colorScheme.primary,
+      decoration: TextDecoration.underline,
+    );
+
+    const userTextStyle = TextStyle(fontSize: 12, height: 4 / 3);
+
+    return DefaultChatTheme(
+      /// colors
+      errorColor: colorScheme.error,
+      highlightMessageColor: colorScheme.background,
+      primaryColor: context.brightness.isDark
+          ? const Color(0x2E000000)
+          : const Color(0xFFF2F2F2),
+      secondaryColor: context.brightness.isDark
+          ? const Color(0x2E000000)
+          : const Color(0xFFF2F2F2),
+      backgroundColor: colorScheme.background,
+
+      /// input layout
+      inputElevation: 3,
+      inputSurfaceTintColor: colorScheme.surfaceTint,
+      inputBackgroundColor: colorScheme.background,
+      inputTextColor: colorScheme.onBackground,
+      inputTextStyle: bodyTextStyle,
+      inputBorderRadius: BorderRadius.zero,
+      inputContainerDecoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: colorScheme.outlineVariant,
+            width: 0.5,
+          ),
+        ),
+      ),
+
+      /// message layout
+      messageBorderRadius: 12,
+      messageInsetsHorizontal: 12,
+      messageInsetsVertical: 6,
+
+      /// user textStyle
+      userNameTextStyle: userTextStyle,
+      userAvatarTextStyle: userTextStyle,
+
+      /// sent message textStyle
+      sentMessageBodyTextStyle: bodyTextStyle,
+      sentMessageBodyLinkTextStyle: bodyLinkTextStyle,
+      sentMessageLinkTitleTextStyle: linkTitleTextStyle,
+      sentMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
+
+      /// received message textStyle
+      receivedMessageBodyTextStyle: bodyTextStyle,
+      receivedMessageBodyLinkTextStyle: bodyLinkTextStyle,
+      receivedMessageLinkTitleTextStyle: linkTitleTextStyle,
+      receivedMessageLinkDescriptionTextStyle: linkDescriptionTextStyle,
+    );
   }
 }

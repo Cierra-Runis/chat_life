@@ -8,6 +8,9 @@ environment:
 
 dependencies:
   dart_frog: ^1.0.0
+  dart_frog_web_socket: ^1.0.0
+  flutter_chat_types: ^3.6.2
+  logger: ^2.0.2+1
 
 dev_dependencies:
   mocktail: ^1.0.0
