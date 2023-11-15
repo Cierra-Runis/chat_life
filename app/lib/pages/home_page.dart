@@ -1,5 +1,5 @@
 import 'package:chat_life/index.dart';
-import 'package:chat_life/pages/chat_page.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -38,87 +38,74 @@ class HomePage extends StatelessWidget {
         ],
       ),
       drawer: const HomeDrawer(),
-      body: BasedListView(
+      body: const BasedListView(
         children: [
           BasedListSection(
             children: [
-              BasedListTile(
-                leading: const BasedAvatar(
-                  image: NetworkImage(App.authorGitHubAvatar),
-                ),
-                titleText: App.name,
-                subtitleText: 'text',
-                subtitleTextStyle: TextStyle(
-                  color: context.colorScheme.outline,
-                  fontSize: 12,
-                ),
-                trailing: const Badge(
-                  smallSize: 12,
-                  largeSize: 12,
-                  label: Text(
-                    '9999',
-                    style: TextStyle(fontSize: 8),
-                  ),
-                  child: Text(
-                    '22:21',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                onTap: () => context.push(const ChatPage()),
-              ),
-              BasedListTile(
-                leading: const BasedAvatar(
-                  image: NetworkImage(App.authorGitHubAvatar),
-                ),
-                titleText: App.name,
-                subtitleText: 'text',
-                subtitleTextStyle: TextStyle(
-                  color: context.colorScheme.outline,
-                  fontSize: 12,
-                ),
-                trailing: const Badge(
-                  smallSize: 12,
-                  largeSize: 12,
-                  label: Text(
-                    '9999',
-                    style: TextStyle(fontSize: 8),
-                  ),
-                  child: Text(
-                    '22:21',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                onTap: () => context.push(const ChatPage()),
-              ),
-              BasedListTile(
-                leading: const BasedAvatar(
-                  image: NetworkImage(App.authorGitHubAvatar),
-                ),
-                titleText: App.name,
-                subtitleText: 'text',
-                subtitleTextStyle: TextStyle(
-                  color: context.colorScheme.outline,
-                  fontSize: 12,
-                ),
-                trailing: const Badge(
-                  smallSize: 12,
-                  largeSize: 12,
-                  label: Text(
-                    '9999',
-                    style: TextStyle(
-                      fontSize: 8,
-                    ),
-                  ),
-                  child: Text(
-                    '22:21',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                onTap: () => context.push(const ChatPage()),
-              ),
+              ChatListTile(),
+              ChatListTile(),
+              ChatListTile(),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ChatListTile extends StatefulWidget {
+  const ChatListTile({
+    super.key,
+  });
+
+  @override
+  State<ChatListTile> createState() => _ChatListTileState();
+}
+
+class _ChatListTileState extends State<ChatListTile> {
+  late types.Room room;
+
+  @override
+  void initState() {
+    super.initState();
+    const user = types.User(
+      id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
+      imageUrl: App.authorGitHubAvatar,
+    );
+
+    room = types.Room(
+      id: randomString(),
+      type: types.RoomType.group,
+      users: const [user],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BasedListTile(
+      leading: const BasedAvatar(
+        image: NetworkImage(App.authorGitHubAvatar),
+      ),
+      titleText: room.name ?? '',
+      subtitleText: 'text',
+      subtitleTextStyle: TextStyle(
+        color: context.colorScheme.outline,
+        fontSize: 12,
+      ),
+      trailing: const Badge(
+        smallSize: 12,
+        largeSize: 12,
+        label: Text(
+          '9999',
+          style: TextStyle(fontSize: 8),
+        ),
+        child: Text(
+          '22:21',
+          style: TextStyle(fontSize: 12),
+        ),
+      ),
+      onTap: () => context.push(
+        ChatPage(id: room.id),
       ),
     );
   }
