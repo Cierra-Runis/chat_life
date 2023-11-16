@@ -2,60 +2,72 @@ import 'package:chat_life/index.dart';
 
 final splitViewKey = GlobalKey<NavigatorState>();
 
-class RootPage extends StatefulWidget {
+class RootPage extends StatelessWidget {
   const RootPage({super.key});
-
-  @override
-  State<RootPage> createState() => _RootPageState();
-}
-
-class _RootPageState extends State<RootPage> {
-  int _currentIndex = 0;
-
-  void _onDestinationSelected(int index) {
-    setState(() => _currentIndex = index);
-  }
-
-  static const List<Widget> _bodyWidgets = [
-    HomePage(key: ValueKey(HomePage)),
-    ContactsPage(key: ValueKey(ContactsPage)),
-    SpacePage(key: ValueKey(SpacePage)),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return BasedSplitView(
       splitMode: SplitMode.width,
       navigatorKey: splitViewKey,
-      leftWidth: 364,
-      breakPoint: 364 * 2,
-      leftWidget: Scaffold(
-        body: Center(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: _bodyWidgets[_currentIndex],
-          ),
-        ),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _currentIndex,
-          onDestinationSelected: _onDestinationSelected,
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.message_rounded),
-              label: '消息',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.group_rounded),
-              label: '联系人',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.public_rounded),
-              label: '空间',
-            ),
-          ],
+      leftWidget: const LeftWidget(),
+      rightPlaceholder: const RightPlaceholder(),
+    );
+  }
+}
+
+class LeftWidget extends StatefulWidget {
+  const LeftWidget({
+    super.key,
+  });
+
+  @override
+  State<LeftWidget> createState() => _LeftWidgetState();
+}
+
+class _LeftWidgetState extends State<LeftWidget> {
+  static const _destinationModel = _NavigationDestinationModel(
+    destinations: [
+      NavigationDestination(
+        icon: Icon(Icons.message_rounded),
+        label: '消息',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.group_rounded),
+        label: '联系人',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.public_rounded),
+        label: '空间',
+      ),
+    ],
+    bodies: [
+      HomePage(key: ValueKey(HomePage)),
+      ContactsPage(key: ValueKey(ContactsPage)),
+      SpacePage(key: ValueKey(SpacePage)),
+    ],
+  );
+
+  int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() => _currentIndex = index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: _destinationModel.bodies[_currentIndex],
         ),
       ),
-      rightPlaceholder: const RightPlaceholder(),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: _onItemTapped,
+        destinations: _destinationModel.destinations,
+      ),
     );
   }
 }
@@ -69,13 +81,17 @@ class RightPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Image(
-          image: AssetImage(
-            'assets/images/app_icon.ico',
-          ),
-          width: 128,
-        ),
+        child: ChatLifeIcon(),
       ),
     );
   }
+}
+
+class _NavigationDestinationModel {
+  const _NavigationDestinationModel({
+    required this.destinations,
+    required this.bodies,
+  });
+  final List<NavigationDestination> destinations;
+  final List<Widget> bodies;
 }

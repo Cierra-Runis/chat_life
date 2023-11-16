@@ -15,9 +15,7 @@ class HomeDrawer extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 180,
             flexibleSpace: const FlexibleSpaceBar(
-              background: Image(
-                image: AssetImage('assets/images/app_icon.ico'),
-              ),
+              background: ChatLifeIcon(),
             ),
             stretch: true,
             leading: ActionChip(
@@ -59,6 +57,29 @@ class HomeDrawer extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ChatLifeIcon extends StatelessWidget {
+  const ChatLifeIcon({
+    super.key,
+    this.width = 128,
+    this.color,
+  });
+
+  final double width;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'assets/images/icon.svg',
+      width: width,
+      colorFilter: ColorFilter.mode(
+        color ?? context.colorScheme.outline,
+        BlendMode.srcIn,
       ),
     );
   }
