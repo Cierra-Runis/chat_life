@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:dart_frog/dart_frog.dart';
+import 'package:server/index.dart';
 
 Future<void> init(InternetAddress ip, int port) async {
   // Any code initialized within this method will only run on server start, any hot reloads

@@ -1,4 +1,4 @@
-import 'package:dart_frog/dart_frog.dart';
+import 'package:server/index.dart';
 
 Response onRequest(RequestContext context) {
   return Response(body: 'Welcome to Dart Frog!');

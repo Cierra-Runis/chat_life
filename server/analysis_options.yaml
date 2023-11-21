@@ -1,7 +1,10 @@
 include: package:very_good_analysis/analysis_options.5.1.0.yaml
 analyzer:
+  errors:
+    invalid_annotation_target: ignore
   exclude:
     - build/**
 linter:
   rules:
     file_names: false
+    no_default_cases: false
