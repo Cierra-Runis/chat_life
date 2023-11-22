@@ -16,18 +16,10 @@ sealed class Message with _$Message {
     required String url,
   }) = ImageMessage;
 
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      _$MessageFromJson(json);
+  factory Message.fromJson(Json json) => _$MessageFromJson(json);
 }
 
-/// unionKey
-enum MessageType {
-  /// identify to [TextMessage]
-  text,
-
-  /// identify to [ImageMessage]
-  image
-}
+enum MessageType { text, image }
 
 enum TextMessageDataType { plain, image, url }
 

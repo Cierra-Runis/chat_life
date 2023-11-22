@@ -8,42 +8,31 @@ sealed class LoginRequest with _$LoginRequest {
     @Default(LoginRequestMethod.email) LoginRequestMethod method,
     required String email,
     required String password,
-  }) = _EmailLoginRequest;
+  }) = EmailLoginRequest;
 
   const factory LoginRequest.userId({
     @Default(LoginRequestMethod.userId) LoginRequestMethod method,
-    required int userId,
+    required String userId,
     required String password,
-  }) = _UserIdLoginRequest;
+  }) = UserIdLoginRequest;
 
   const LoginRequest._();
 
-  factory LoginRequest.fromJson(Map<String, Object?> json) =>
-      _$LoginRequestFromJson(json);
+  factory LoginRequest.fromJson(Json json) => _$LoginRequestFromJson(json);
 }
 
 enum LoginRequestMethod { email, userId }
 
+@freezed
 class LoginResponse with _$LoginResponse {
-  const factory LoginResponse.error({
-    @Default(LoginResponseResult.requestIllegal) LoginResponseResult result,
-    required String? token,
-  }) = _ErrorLoginResponse;
-
-  const factory LoginResponse.email({
+  const factory LoginResponse({
     required LoginResponseResult result,
-    required String? token,
-  }) = _EmailLoginResponse;
-
-  const factory LoginResponse.userId({
-    required LoginResponseResult result,
-    required String? token,
-  }) = _UserIdLoginResponse;
+    String? token,
+  }) = _LoginResponse;
 
   const LoginResponse._();
 
-  factory LoginResponse.fromJson(Map<String, Object?> json) =>
-      _$LoginResponseFromJson(json);
+  factory LoginResponse.fromJson(Json json) => _$LoginResponseFromJson(json);
 }
 
 enum LoginResponseResult {

@@ -12,7 +12,7 @@ class RegisterRequest with _$RegisterRequest {
 
   const RegisterRequest._();
 
-  factory RegisterRequest.fromJson(Map<String, Object?> json) =>
+  factory RegisterRequest.fromJson(Json json) =>
       _$RegisterRequestFromJson(json);
 }
 
@@ -25,7 +25,7 @@ class RegisterResponse with _$RegisterResponse {
 
   const RegisterResponse._();
 
-  factory RegisterResponse.fromJson(Map<String, Object?> json) =>
+  factory RegisterResponse.fromJson(Json json) =>
       _$RegisterResponseFromJson(json);
 }
 

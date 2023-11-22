@@ -8,5 +8,5 @@ sealed class Event with _$Event {
 
   const factory Event.message() = MessageEvent;
 
-  factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
+  factory Event.fromJson(Json json) => _$EventFromJson(json);
 }
