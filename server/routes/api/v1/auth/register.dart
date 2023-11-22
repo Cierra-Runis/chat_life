@@ -12,8 +12,10 @@ Future<Response> onRequest(RequestContext context) async {
 Future<Response> _register(RequestContext context) async {
   try {
     final request = RegisterRequest.fromJson(
-      await context.request.json() as Map<String, dynamic>,
+      await context.request.json() as Json,
     );
+
+    final isarService = context.read<IsarService>();
 
     if (await isarService.emailOccupied(request.email)) {
       return Response.json(
@@ -30,26 +32,29 @@ Future<Response> _register(RequestContext context) async {
         id: userId,
         name: request.username,
         createAt: DateTime.now(),
+        updateAt: DateTime.now(),
       ),
     );
 
-    await isarService.createCredential(
-      Credential(
-        id: const UuidV4().generate(),
-        userId: userId,
-        email: request.email,
-        password: request.password,
-      ),
+    final credential = Credential(
+      id: const UuidV4().generate(),
+      userId: userId,
+      email: request.email,
+      password: request.password,
     );
+
+    await isarService.createCredential(credential);
 
     return Response.json(
       body: RegisterResponse(
         result: RegisterResponseResult.success,
-        token: const UuidV4().generate(),
+        token: JWT(
+          Token.fromCredential(credential).toJson(),
+        ).sign(SecretKey('secret')),
       ),
     );
-  } catch (e) {
-    _logger.e(RegisterResponseResult.requestIllegal, error: e);
+  } catch (e, s) {
+    _logger.e(RegisterResponseResult.requestIllegal, error: e, stackTrace: s);
     return Response.json(
       body: const RegisterResponse(
         result: RegisterResponseResult.requestIllegal,

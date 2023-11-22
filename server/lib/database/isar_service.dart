@@ -1,14 +1,12 @@
 import 'package:server/index.dart';
 
-final isarService = _IsarService();
-
 abstract class _IsarServiceImpl {
   late Future<Isar> _db;
 }
 
-class _IsarService extends _IsarServiceImpl
+class IsarService extends _IsarServiceImpl
     with _CredentialService, _UserService {
-  _IsarService() {
+  IsarService() {
     _db = openDB();
   }
 
@@ -18,7 +16,6 @@ class _IsarService extends _IsarServiceImpl
         [CredentialSchema, UserSchema],
         directory: Directory.systemTemp.path,
         compactOnLaunch: const CompactCondition(
-          /// 压缩能减小 1KB 及以上，且达到了 1KB 的体积就进行压缩
           minBytes: 1024,
           minFileSize: 1024,
         ),
@@ -26,6 +23,7 @@ class _IsarService extends _IsarServiceImpl
 
       return isar;
     }
+
     return Future.value(Isar.getInstance());
   }
 }
@@ -34,6 +32,34 @@ mixin _CredentialService on _IsarServiceImpl {
   Future<int> createCredential(Credential credential) async {
     final isar = await _db;
     return isar.writeTxn(() => isar.credentials.put(credential));
+  }
+
+  Future<(LoginResponseResult, Credential?)> canLoginWithEmail(
+    EmailLoginRequest request,
+  ) async {
+    final isar = await _db;
+    final credential =
+        await isar.credentials.filter().emailEqualTo(request.email).findFirst();
+    if (credential == null) return (LoginResponseResult.emailNotFound, null);
+    if (credential.password != request.password) {
+      return (LoginResponseResult.passwordError, null);
+    }
+    return (LoginResponseResult.success, credential);
+  }
+
+  Future<(LoginResponseResult, Credential?)> canLoginWithUserId(
+    UserIdLoginRequest request,
+  ) async {
+    final isar = await _db;
+    final credential = await isar.credentials
+        .filter()
+        .userIdEqualTo(request.userId)
+        .findFirst();
+    if (credential == null) return (LoginResponseResult.emailNotFound, null);
+    if (credential.password != request.password) {
+      return (LoginResponseResult.passwordError, null);
+    }
+    return (LoginResponseResult.success, credential);
   }
 
   Future<bool> emailOccupied(String email) async {
@@ -46,6 +72,11 @@ mixin _UserService on _IsarServiceImpl {
   Future<int> createUser(User user) async {
     final isar = await _db;
     return isar.writeTxn(() => isar.users.put(user));
+  }
+
+  Future<User?> getUserById(String id) async {
+    final isar = await _db;
+    return isar.users.filter().idEqualTo(id).findFirst();
   }
 
   Future<User?> getUserByIsarId(Id isarId) async {

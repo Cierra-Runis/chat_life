@@ -13,7 +13,7 @@ Handler get onRequest {
     channel.stream.listen((message) {
       _logger.i(message);
       if (message is String) {
-        final json = jsonDecode(message) as Map<String, dynamic>;
+        final json = jsonDecode(message) as Json;
         final _ = switch (Message.fromJson(json)) {
           final TextMessage textMessage => _logger.i(textMessage),
           final ImageMessage imageMessage => _logger.i(imageMessage),
