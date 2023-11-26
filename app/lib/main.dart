@@ -2,15 +2,8 @@ import 'package:chat_life/index.dart';
 
 void main() => App.run();
 
-// For the testing purposes, you should probably use https://pub.dev/packages/uuid.
-String randomString() {
-  final random = Random.secure();
-  final values = List<int>.generate(16, (i) => random.nextInt(255));
-  return base64UrlEncode(values);
-}
-
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+class ChatLifeApp extends ConsumerWidget {
+  const ChatLifeApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,15 +38,10 @@ class MyApp extends ConsumerWidget {
       theme: theme,
       darkTheme: darkTheme,
       themeMode: settings.themeMode,
-      home: BasedSplashPage(
-        rootPage: Column(
-          children: [
-            if (Platform.isWindows) const ChatLifeAppBar(),
-            const Expanded(child: RootPage()),
-          ],
-        ),
-        appIcon: const Placeholder(),
-        appName: const Text(App.name),
+      home: const BasedSplashPage(
+        rootPage: _RootView(),
+        appIcon: Placeholder(),
+        appName: Text(App.name),
       ),
       supportedLocales: const [
         Locale('zh', 'CN'),
@@ -63,6 +51,33 @@ class MyApp extends ConsumerWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+      ],
+    );
+  }
+}
+
+class _RootView extends ConsumerWidget {
+  const _RootView();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final store = ref.watch(storeProvider);
+
+    return Column(
+      children: [
+        if (Platform.isWindows) const ChatLifeAppBar(),
+        Expanded(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: store.token == null || Token.verify(store.token!) == null
+                ? const LoginPage(
+                    key: ValueKey(LoginPage),
+                  )
+                : const RootPage(
+                    key: ValueKey(RootPage),
+                  ),
+          ),
+        ),
       ],
     );
   }

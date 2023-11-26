@@ -19,6 +19,11 @@
 
 [🔦 声明](#-声明)
 
+![badge](http://jwt.io/img/badge.svg)
+![badge-compatible](http://jwt.io/img/badge-compatible.svg)
+![icon](http://jwt.io/img/icon.svg)
+![logo-asset](http://jwt.io/img/logo-asset.svg)
+
 ---
 
 # 📚 简介

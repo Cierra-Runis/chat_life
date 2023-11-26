@@ -1,5 +1,4 @@
 import 'package:chat_life/index.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -63,21 +62,9 @@ class ChatListTile extends StatefulWidget {
 }
 
 class _ChatListTileState extends State<ChatListTile> {
-  late types.Room room;
-
   @override
   void initState() {
     super.initState();
-    const user = types.User(
-      id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-      imageUrl: App.authorGitHubAvatar,
-    );
-
-    room = types.Room(
-      id: randomString(),
-      type: types.RoomType.group,
-      users: const [user],
-    );
   }
 
   @override
@@ -86,7 +73,7 @@ class _ChatListTileState extends State<ChatListTile> {
       leading: const BasedAvatar(
         image: NetworkImage(App.authorGitHubAvatar),
       ),
-      titleText: room.name ?? '',
+      titleText: '',
       subtitleText: 'text',
       subtitleTextStyle: TextStyle(
         color: context.colorScheme.outline,
@@ -105,7 +92,7 @@ class _ChatListTileState extends State<ChatListTile> {
         ),
       ),
       onTap: () => context.push(
-        ChatPage(id: room.id),
+        const ChatPage(id: 'room.id'),
       ),
     );
   }

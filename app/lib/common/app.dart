@@ -10,6 +10,8 @@ abstract class App {
   static const authorGitHubAvatar =
       'https://avatars.githubusercontent.com/u/29329988';
 
+  static const apiBaseUrl = 'http://localhost:8080';
+
   static void printLog(dynamic log) =>
       devtools.log('$log', name: name, time: DateTime.now());
 
@@ -37,7 +39,7 @@ abstract class App {
             await ColorSchemes.init(),
           ),
         ],
-        child: const MyApp(),
+        child: const ChatLifeApp(),
       ),
     );
   }

@@ -30,8 +30,7 @@ class SettingsState with _$SettingsState {
     @JsonKey(name: _Ext.bgImgPath) String? bgImgPath,
   }) = _SettingsState;
 
-  factory SettingsState.fromJson(Map<String, Object?> json) =>
-      _$SettingsStateFromJson(json);
+  factory SettingsState.fromJson(Json json) => _$SettingsStateFromJson(json);
 }
 
 /// State management

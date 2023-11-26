@@ -1,12 +1,14 @@
 import 'package:chat_life/index.dart';
 
-class HomeDrawer extends StatelessWidget {
+class HomeDrawer extends ConsumerWidget {
   const HomeDrawer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final setStore = ref.watch(storeProvider.notifier);
+
     return Drawer(
       width: double.maxFinite,
       shape: const RoundedRectangleBorder(),
@@ -51,6 +53,11 @@ class HomeDrawer extends StatelessWidget {
                     leadingIcon: Icons.info_outline_rounded,
                     titleText: '关于',
                     onTap: () => context.push(const AboutPage()),
+                  ),
+                  BasedListTile(
+                    leadingIcon: Icons.info_outline_rounded,
+                    titleText: '退出登录',
+                    onTap: () => setStore.setToken(null),
                   ),
                 ],
               ),
