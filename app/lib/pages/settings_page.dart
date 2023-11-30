@@ -9,6 +9,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: const BasedListView(
+        children: [LoginSettingSection()],
+      ),
     );
   }
 }

@@ -48,8 +48,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           FilledButton(
             onPressed: () async {
               try {
-                final res =
-                    await Dio(BaseOptions(baseUrl: App.apiBaseUrl)).post(
+                final res = await Dio(
+                  BaseOptions(baseUrl: ref.watch(settingsProvider).apiBaseUrl),
+                ).post(
                   '/api/v1/auth/register',
                   data: const RegisterRequest(
                     username: 'username',

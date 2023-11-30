@@ -3,6 +3,7 @@ export 'contacts_page.dart';
 export 'chat_page.dart';
 export 'home_page.dart';
 export 'login_page.dart';
+export 'proxy_settings_page.dart';
 export 'qr_page.dart';
 export 'register_page.dart';
 export 'root_page.dart';

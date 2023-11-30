@@ -55,7 +55,7 @@ class HomeDrawer extends ConsumerWidget {
                     onTap: () => context.push(const AboutPage()),
                   ),
                   BasedListTile(
-                    leadingIcon: Icons.info_outline_rounded,
+                    leadingIcon: Icons.logout_rounded,
                     titleText: '退出登录',
                     onTap: () {
                       setStore.setToken(null);

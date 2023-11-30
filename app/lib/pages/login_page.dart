@@ -33,7 +33,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     }
 
     try {
-      final res = await Dio(BaseOptions(baseUrl: App.apiBaseUrl)).post(
+      final res = await Dio(
+        BaseOptions(baseUrl: ref.watch(settingsProvider).apiBaseUrl),
+      ).post(
         '/api/v1/auth/login',
         data: switch (_method) {
           LoginRequestMethod.userId => LoginRequest.userId(
@@ -96,7 +98,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => context.push(
+              const _LoginSettingPage(),
+            ),
             icon: const Icon(Icons.settings_rounded),
           ),
         ],
@@ -175,6 +179,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         ],
         actionsAlignment: MainAxisAlignment.spaceBetween,
       ),
+    );
+  }
+}
+
+class _LoginSettingPage extends StatelessWidget {
+  const _LoginSettingPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('设置'),
+      ),
+      body: const LoginSettingSection(),
     );
   }
 }

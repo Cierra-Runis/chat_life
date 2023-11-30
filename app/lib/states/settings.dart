@@ -9,6 +9,7 @@ part 'settings.freezed.dart';
 extension _Ext on Persistence {
   static const themeMode = '${Persistence.prefix}_themeMode';
   static const bgImgPath = '${Persistence.prefix}_bgImgPath';
+  static const apiBaseUrl = '${Persistence.prefix}_apiBaseUrl';
 
   ThemeMode getThemeMode() => ThemeMode.values.firstWhere(
         (element) => element.name == sp.getString(themeMode),
@@ -16,6 +17,10 @@ extension _Ext on Persistence {
       );
   Future<void> setThemeMode(ThemeMode value) async =>
       await sp.setString(themeMode, value.name);
+
+  String getApiBaseUrl() => sp.getString(apiBaseUrl) ?? 'http://localhost:8080';
+  Future<void> setApiBaseUrl(String value) async =>
+      await sp.setString(apiBaseUrl, value);
 }
 
 /// State which return by [ref.watch]
@@ -28,6 +33,7 @@ class SettingsState with _$SettingsState {
   const factory SettingsState({
     @JsonKey(name: _Ext.themeMode) required ThemeMode themeMode,
     @JsonKey(name: _Ext.bgImgPath) String? bgImgPath,
+    @JsonKey(name: _Ext.apiBaseUrl) required String apiBaseUrl,
   }) = _SettingsState;
 
   factory SettingsState.fromJson(Json json) => _$SettingsStateFromJson(json);
@@ -46,6 +52,7 @@ class Settings extends _$Settings {
     _pers = ref.watch(persistenceProvider);
     return SettingsState(
       themeMode: _pers.getThemeMode(),
+      apiBaseUrl: _pers.getApiBaseUrl(),
     );
   }
 
@@ -66,5 +73,10 @@ class Settings extends _$Settings {
     final nextIndex = (currentIndex + 1) % modes.length;
     final nextMode = modes.elementAt(nextIndex);
     setThemeMode(nextMode);
+  }
+
+  Future<void> setApiBaseUrl(String value) async {
+    await _pers.setApiBaseUrl(value);
+    state = state.copyWith(apiBaseUrl: value);
   }
 }
