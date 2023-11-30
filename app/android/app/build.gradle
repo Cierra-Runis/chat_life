@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.app"
+    namespace "pers.cierra_runis.chatLife"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -41,8 +41,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.app"
+        applicationId "pers.cierra_runis.chatLife"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -51,11 +50,27 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs{
+        debug{
+            keyAlias 'key_alias'
+            keyPassword 'key_alias_password'
+            storeFile file('C:\\click\\key_alias.jks')
+            storePassword 'key_alias_password'
+        }
+        release{
+            keyAlias 'key_alias'
+            keyPassword 'key_alias_password'
+            storeFile file('C:\\click\\key_alias.jks')
+            storePassword 'key_alias_password'
+        }
+    }
+
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        debug {
             signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
 }

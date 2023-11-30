@@ -46,3 +46,5 @@ app.*.map.json
 *.g.dart
 *.freezed.dart
 **/lib/l10n/**/*.dart
+
+.release_tool/
