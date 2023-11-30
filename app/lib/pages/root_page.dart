@@ -8,7 +8,6 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasedSplitView(
-      splitMode: SplitMode.width,
       navigatorKey: splitViewKey,
       leftWidget: const LeftWidget(),
       rightPlaceholder: const RightPlaceholder(),

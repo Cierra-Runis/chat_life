@@ -2,6 +2,8 @@ import 'package:chat_life/index.dart';
 
 void main() => App.run();
 
+final chatLifeAppKey = GlobalKey<NavigatorState>();
+
 class ChatLifeApp extends ConsumerWidget {
   const ChatLifeApp({super.key});
 
@@ -21,7 +23,6 @@ class ChatLifeApp extends ConsumerWidget {
       fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
       colorScheme: colorSchemes.light,
       appBarTheme: appBarTheme,
-      useMaterial3: true,
     );
 
     final darkTheme = ThemeData(
@@ -29,19 +30,27 @@ class ChatLifeApp extends ConsumerWidget {
       fontFamilyFallback: const [App.fontCascadiaCodePL, App.fontMiSans],
       colorScheme: colorSchemes.dark,
       appBarTheme: appBarTheme,
-      useMaterial3: true,
     );
+
+    Widget builder(context, child) => Column(
+          children: [
+            if (Platform.isWindows) const ChatLifeAppBar(),
+            Expanded(child: ClipRRect(child: child)),
+          ],
+        );
 
     return MaterialApp(
       title: App.name,
+      navigatorKey: chatLifeAppKey,
       scrollBehavior: const CupertinoScrollBehavior(),
       theme: theme,
       darkTheme: darkTheme,
       themeMode: settings.themeMode,
+      builder: builder,
       home: const BasedSplashPage(
         rootPage: _RootView(),
-        appIcon: Placeholder(),
-        appName: Text(App.name),
+        appIcon: AppIcon(),
+        appName: AppName(),
       ),
       supportedLocales: const [
         Locale('zh', 'CN'),
@@ -56,29 +65,48 @@ class ChatLifeApp extends ConsumerWidget {
   }
 }
 
+class AppName extends StatelessWidget {
+  const AppName({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      App.name,
+      style: TextStyle(fontSize: 42, fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class AppIcon extends StatelessWidget {
+  const AppIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'assets/images/icon.svg',
+      width: 96,
+      colorFilter: ColorFilter.mode(
+        context.colorScheme.outline,
+        BlendMode.srcIn,
+      ),
+    );
+  }
+}
+
 class _RootView extends ConsumerWidget {
   const _RootView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final store = ref.watch(storeProvider);
+    /// TIPS: use `read` instead `watch`
+    final store = ref.read(storeProvider);
 
-    return Column(
-      children: [
-        if (Platform.isWindows) const ChatLifeAppBar(),
-        Expanded(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: store.token == null || Token.verify(store.token!) == null
-                ? const LoginPage(
-                    key: ValueKey(LoginPage),
-                  )
-                : const RootPage(
-                    key: ValueKey(RootPage),
-                  ),
-          ),
-        ),
-      ],
-    );
+    return store.token == null || Token.verify(store.token!) == null
+        ? const LoginPage()
+        : const RootPage();
   }
 }

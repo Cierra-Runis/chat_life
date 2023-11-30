@@ -1,8 +1,9 @@
 import 'package:chat_life/index.dart';
 
 extension BuildContextExt on BuildContext {
-  Future<T?> push<T extends Object?>(Widget page) => splitViewKey.currentState!
-      .push(CupertinoPageRoute<T>(builder: (_) => page));
+  Future<T?> push<T extends Object?>(Widget page) =>
+      (splitViewKey.currentState ?? Navigator.of(this))
+          .push(CupertinoPageRoute<T>(builder: (_) => page));
 
   void pop<T extends Object?>([T? result]) => Navigator.pop(this, result);
 

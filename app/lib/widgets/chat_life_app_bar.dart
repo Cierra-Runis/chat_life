@@ -16,7 +16,6 @@ class ChatLifeAppBar extends ConsumerWidget {
       onDoubleTap: toggleMaximized,
       onPanStart: (details) => windowManager.startDragging(),
       child: AppBar(
-        elevation: 3,
         toolbarHeight: appBarHeight,
         title: const Text(
           App.name,

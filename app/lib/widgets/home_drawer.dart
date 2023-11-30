@@ -57,7 +57,16 @@ class HomeDrawer extends ConsumerWidget {
                   BasedListTile(
                     leadingIcon: Icons.info_outline_rounded,
                     titleText: '退出登录',
-                    onTap: () => setStore.setToken(null),
+                    onTap: () {
+                      setStore.setToken(null);
+                      Navigator.pushAndRemoveUntil(
+                        chatLifeAppKey.currentContext ?? context,
+                        CupertinoPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                   ),
                 ],
               ),

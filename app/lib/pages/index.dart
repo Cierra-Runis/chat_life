@@ -4,6 +4,7 @@ export 'chat_page.dart';
 export 'home_page.dart';
 export 'login_page.dart';
 export 'qr_page.dart';
+export 'register_page.dart';
 export 'root_page.dart';
 export 'settings_page.dart';
 export 'space_page.dart';
