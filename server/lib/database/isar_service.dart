@@ -55,7 +55,7 @@ mixin _CredentialService on _IsarServiceImpl {
         .filter()
         .userIdEqualTo(request.userId)
         .findFirst();
-    if (credential == null) return (LoginResponseResult.emailNotFound, null);
+    if (credential == null) return (LoginResponseResult.userIdNotFound, null);
     if (credential.password != request.password) {
       return (LoginResponseResult.passwordError, null);
     }
