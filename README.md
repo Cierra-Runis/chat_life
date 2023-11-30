@@ -19,16 +19,13 @@
 
 [🔦 声明](#-声明)
 
-![badge](http://jwt.io/img/badge.svg)
-![badge-compatible](http://jwt.io/img/badge-compatible.svg)
-![icon](http://jwt.io/img/icon.svg)
-![logo-asset](http://jwt.io/img/logo-asset.svg)
-
 ---
 
 # 📚 简介
 
-暂无
+- ![badge-compatible](http://jwt.io/img/badge-compatible.svg)
+- [API 参考](https://developer.hitokoto.cn/core/interface.html)
+- [Material Icons](https://fonts.google.com/icons?icon.style=Rounded)
 
 # 📸 示例
 
