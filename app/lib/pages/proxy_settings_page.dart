@@ -22,6 +22,14 @@ class ProxySettingsPage extends ConsumerWidget {
             ),
             onChanged: setSettings.setApiBaseUrl,
           ),
+          TextField(
+            controller: TextEditingController(text: settings.wsBaseUrl),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'wsBaseUrl',
+            ),
+            onChanged: setSettings.setWsBaseUrl,
+          ),
         ],
       ),
     );
