@@ -32,7 +32,7 @@ abstract class Bytes {
   }
 }
 
-extension FileSystemEntityExtension on FileSystemEntity {
+extension FileSystemEntityExt on FileSystemEntity {
   int getBytes() {
     if (this is File) return File(path).lengthSync();
     if (this is Directory) return Directory(path).getBytes();
@@ -40,7 +40,7 @@ extension FileSystemEntityExtension on FileSystemEntity {
   }
 }
 
-extension DirectoryExtension on Directory {
+extension DirectoryExt on Directory {
   int getBytes() {
     var sum = 0;
     for (final file in listSync()) {

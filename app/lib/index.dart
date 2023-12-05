@@ -15,6 +15,7 @@ export 'dart:ui' show FontFeature;
 
 export 'package:flutter/material.dart';
 export 'package:flutter/cupertino.dart' hide RefreshCallback;
+export 'package:flutter/foundation.dart';
 
 export 'package:based_avatar/based_avatar.dart';
 export 'package:based_list/based_list.dart';
@@ -22,14 +23,17 @@ export 'package:based_qr/based_qr.dart';
 export 'package:based_splash_page/based_splash_page.dart';
 export 'package:based_split_view/based_split_view.dart';
 export 'package:dart_date/dart_date.dart' hide Interval;
+export 'package:device_info_plus/device_info_plus.dart';
 export 'package:dio/dio.dart';
 export 'package:dynamic_color/dynamic_color.dart';
 export 'package:file_picker/file_picker.dart';
 export 'package:flutter_displaymode/flutter_displaymode.dart';
+export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_link_previewer/flutter_link_previewer.dart' hide Size;
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_quill/flutter_quill.dart';
-export 'package:flutter_riverpod/flutter_riverpod.dart';
+export 'package:hooks_riverpod/hooks_riverpod.dart'
+    hide describeIdentity, shortHash;
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:image_picker/image_picker.dart';
