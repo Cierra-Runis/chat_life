@@ -102,8 +102,7 @@ class _RootView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /// TIPS: use `read` instead `watch`
-    final store = ref.read(storeProvider);
+    final store = ref.watch(localStoreProvider);
 
     return store.token == null || Token.verify(store.token!) == null
         ? const LoginPage()

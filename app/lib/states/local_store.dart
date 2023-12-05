@@ -1,7 +1,7 @@
 import 'package:chat_life/index.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'store.g.dart';
-part 'store.freezed.dart';
+part 'local_store.g.dart';
+part 'local_store.freezed.dart';
 
 extension _Ext on Persistence {
   static const token = '${Persistence.prefix}_token';
@@ -14,24 +14,25 @@ extension _Ext on Persistence {
 }
 
 @freezed
-class StoreState with _$StoreState {
-  const StoreState._();
+class LocalStoreState with _$LocalStoreState {
+  const LocalStoreState._();
 
-  const factory StoreState({
+  const factory LocalStoreState({
     @JsonKey(name: _Ext.token) String? token,
-  }) = _StoreState;
+  }) = _LocalStoreState;
 
-  factory StoreState.fromJson(Json json) => _$StoreStateFromJson(json);
+  factory LocalStoreState.fromJson(Json json) =>
+      _$LocalStoreStateFromJson(json);
 }
 
 @riverpod
-class Store extends _$Store {
+class LocalStore extends _$LocalStore {
   late final Persistence _pers;
 
   @override
-  StoreState build() {
+  LocalStoreState build() {
     _pers = ref.watch(persistenceProvider);
-    return StoreState(token: _pers.getToken());
+    return LocalStoreState(token: _pers.getToken());
   }
 
   Future<void> setToken(String? value) async {

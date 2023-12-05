@@ -17,7 +17,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   void switchLoginMethod(LoginRequestMethod method) =>
       setState(() => _method = method);
 
-  void onPressed(Store setStore) async {
+  void onPressed(LocalStore setLocalStore) async {
     if (_idOrEmail.text == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -50,6 +50,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             .toJson(),
       );
 
+      if (!mounted) return;
+
       final response = LoginResponse.fromJson(res.data);
 
       switch (response.result) {
@@ -75,7 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           return;
         case LoginResponseResult.success:
           if (response.token != null) {
-            setStore.setToken(response.token);
+            setLocalStore.setToken(response.token);
             Navigator.pushAndRemoveUntil(
               context,
               CupertinoPageRoute(
@@ -92,7 +94,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final setStore = ref.watch(storeProvider.notifier);
+    final setLocalStore = ref.watch(localStoreProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -173,7 +175,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: const Text('创建账号'),
           ),
           FilledButton(
-            onPressed: () => onPressed(setStore),
+            onPressed: () => onPressed(setLocalStore),
             child: const Text('登录'),
           ),
         ],

@@ -10,7 +10,7 @@ class RegisterPage extends ConsumerStatefulWidget {
 class _RegisterPageState extends ConsumerState<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    final setStore = ref.watch(storeProvider.notifier);
+    final setLocalStore = ref.watch(localStoreProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(),
@@ -59,6 +59,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ).toJson(),
                 );
 
+                if (!mounted) return;
+
                 final response = RegisterResponse.fromJson(res.data);
 
                 switch (response.result) {
@@ -74,7 +76,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     return;
                   case RegisterResponseResult.success:
                     if (response.token != null) {
-                      setStore.setToken(response.token);
+                      setLocalStore.setToken(response.token);
                       Navigator.pushAndRemoveUntil(
                         context,
                         CupertinoPageRoute(

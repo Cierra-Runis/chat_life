@@ -1,13 +1,18 @@
 import 'package:chat_life/index.dart';
 
-class HomeDrawer extends ConsumerWidget {
+class HomeDrawer extends ConsumerStatefulWidget {
   const HomeDrawer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final setStore = ref.watch(storeProvider.notifier);
+  ConsumerState<HomeDrawer> createState() => _HomeDrawerState();
+}
+
+class _HomeDrawerState extends ConsumerState<HomeDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    final setLocalStore = ref.watch(localStoreProvider.notifier);
 
     return Drawer(
       width: double.maxFinite,
@@ -58,7 +63,7 @@ class HomeDrawer extends ConsumerWidget {
                     leadingIcon: Icons.logout_rounded,
                     titleText: '退出登录',
                     onTap: () {
-                      setStore.setToken(null);
+                      setLocalStore.setToken(null);
                       Navigator.pushAndRemoveUntil(
                         chatLifeAppKey.currentContext ?? context,
                         CupertinoPageRoute(
