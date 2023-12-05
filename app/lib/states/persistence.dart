@@ -2,11 +2,11 @@ import 'package:chat_life/index.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'persistence.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Persistence persistence(PersistenceRef ref) =>
     throw Exception('persistenceProvider not initialized');
 
-/// This service abstracts the persistence layer.
+/// [Persistence] abstracts the [SharedPreferences] layer
 class Persistence {
   final SharedPreferences sp;
   static const prefix = 'ms';

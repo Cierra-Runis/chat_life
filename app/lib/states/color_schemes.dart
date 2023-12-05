@@ -1,16 +1,21 @@
 import 'package:chat_life/index.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'color_schemes.g.dart';
+part 'color_schemes.freezed.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 ColorSchemes colorSchemes(ColorSchemesRef ref) =>
     throw Exception('colorSchemesProvider not initialized');
 
-class ColorSchemes {
-  final ColorScheme light;
-  final ColorScheme dark;
+/// [ColorSchemes]
+@freezed
+class ColorSchemes with _$ColorSchemes {
+  const ColorSchemes._();
 
-  const ColorSchemes._(this.light, this.dark);
+  const factory ColorSchemes({
+    required ColorScheme light,
+    required ColorScheme dark,
+  }) = _ColorSchemes;
 
   static Future<ColorSchemes> init() async {
     final palette = await DynamicColorPlugin.getCorePalette();
@@ -30,6 +35,6 @@ class ColorSchemes {
           brightness: Brightness.dark,
         );
 
-    return ColorSchemes._(light, dark);
+    return ColorSchemes(light: light, dark: dark);
   }
 }
