@@ -27,26 +27,24 @@
 - [API 参考](https://developer.hitokoto.cn/core/interface.html)
 - [Material Icons](https://fonts.google.com/icons?icon.style=Rounded)
 
-# 📸 示例
+```powershell
+netstat -ano | findstr 8181
+taskkill -pid 0 -f
+dart_frog dev -H 0.0.0.0
+```
 
-暂无
+# 📸 示例
 
 # 📦 使用方式
 
-略
-
 # ⏳ 进度
 
-略
-
 # 📌 注意事项
-
-暂无
 
 # 🧑‍💻 贡献者
 
 <a href="https://github.com/Cierra-Runis/chat_life/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Cierra-Runis/chat_life" />
+  <img src="https://contrib.rocks/image?repo=Cierra-Runis/chat_life" alt="contrib"/>
 </a>
 
 # 🔦 声明
