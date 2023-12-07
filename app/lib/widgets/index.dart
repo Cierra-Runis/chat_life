@@ -1,3 +1,4 @@
+export 'inputs/index.dart';
 export 'sections/index.dart';
 export 'tiles/index.dart';
 
