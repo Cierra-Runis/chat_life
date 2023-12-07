@@ -4,6 +4,9 @@ analyzer:
     invalid_annotation_target: ignore
   exclude:
     - build/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/l10n/*"
 linter:
   rules:
     file_names: false

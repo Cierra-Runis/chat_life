@@ -2,8 +2,12 @@ import 'package:models/index.dart';
 part 'token.g.dart';
 part 'token.freezed.dart';
 
+/// {@template models.token}
+/// [Token] template
+/// {@endtemplate}
 @freezed
 class Token with _$Token {
+  /// {@macro models.token}
   const factory Token({
     required String userId,
     required String email,
